@@ -5,7 +5,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
+        <li *ngIf="isUserAuthenticated()" class="nav-item active">
+          <a class="nav-link" routerLink="/almacen">Almacenes</a>
+        </li>
+        <li *ngIf="isUserAuthenticated()" class="nav-item active">
+          <a class="nav-link" routerLink="/producto">Productos</a>
+        </li>
+        <li *ngIf="isUserAuthenticated()" class="nav-item active">
+          <a class="nav-link" routerLink="/cliente">Clientes</a>
+        </li>
+        <li *ngIf="isUserAuthenticated()" class="nav-item active">
           <a class="nav-link" routerLink="/usuario">Usuarios</a>
         </li>
         <li *ngIf="isUserAuthenticated()" class="nav-item">
