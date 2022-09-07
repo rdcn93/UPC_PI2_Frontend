@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Product Application</a>
+    <a class="navbar-brand" href="#">Premier Beef</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -19,13 +19,10 @@
                 <a class="nav-link" routerLink="/cliente">Clientes</a>
               </li>
               <li *ngIf="isUserAuthenticated()" class="nav-item active">
-                <a class="nav-link" routerLink="/usuario">Proveedores</a>
+                <a class="nav-link" routerLink="/proveedor">Proveedores</a>
               </li>
             <li class="nav-item">
                 <a class="nav-link" (click)="logOut()">Logout</a>
-            </li>
-            <li *ngIf="!isUserAuthenticated()" class="nav-item active">
-                <a class="nav-link" routerLink="/product">Products</a>
             </li>
         </ul>
     </div>
@@ -43,42 +40,42 @@
         </div>
         <br />
         <div class="form-group">
-            <label class="control-label col-sm-2" for="pwd">Descripción :</label>
+            <label class="control-label col-sm-2" for="pwd">Apellido Paterno :</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="txtProductDescription" formControlName="descripcion"
+                <input type="text" class="form-control" id="txtProductDescription" formControlName="apePaterno"
                     placeholder="Descripción">
             </div>
-
-            <br />
         </div>
-
+        <br />
         <div class="form-group">
-            <label class="control-label col-sm-2" for="pwd">Precio :</label>
+            <label class="control-label col-sm-2" for="pwd">Apellido Paterno :</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="txtProductDescription" formControlName="precio"
+                <input type="text" class="form-control" id="txtProductDescription" formControlName="apeMaterno"
                     placeholder="Precio">
             </div>
         </div>
         <br />
         <div class="form-group">
-            <label class="control-label col-sm-2" for="pwd">Categoria:</label>
+            <label class="control-label col-sm-2" for="pwd">Dirección :</label>
             <div class="col-sm-10">
-                <select class="form-select" formControlName="orders" id="orders" formControlName="idCategoria">
-                    <option *ngFor="let rol of Roles | async; let i = index" [value]="rol.id">
-                        {{rol.nombre}}
-                    </option>
-                </select>
+                <input type="text" class="form-control" id="txtProductDescription" formControlName="direccion"
+                    placeholder="Precio">
             </div>
         </div>
         <br />
         <div class="form-group">
-            <label class="control-label col-sm-2" for="pwd">Proveedor:</label>
+            <label class="control-label col-sm-2" for="pwd">Telefono :</label>
             <div class="col-sm-10">
-                <select class="form-select" formControlName="orders" id="orders" formControlName="idProveedor">
-                    <option *ngFor="let rol of Roles | async; let i = index" [value]="rol.id">
-                        {{rol.nombre}}
-                    </option>
-                </select>
+                <input type="text" class="form-control" id="txtProductDescription" formControlName="telefono"
+                    placeholder="Precio">
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">RUC :</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="txtProductDescription" formControlName="ruc"
+                    placeholder="Precio">
             </div>
         </div>
         <br />
@@ -108,8 +105,11 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Descripcion</th>
-                            <th scope="col">Precio</th>
+                            <th scope="col">Ape. Paterno</th>
+                            <th scope="col">Ape. Paterno</th>
+                            <th scope="col">Dirección</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col">RUC</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -117,8 +117,11 @@
                         <tr *ngFor="let prd of ProductList | async; index as i">
                             <th scope="row">{{ i + 1 }}</th>
                             <td>{{prd.nombre}}</td>
-                            <td>{{prd.descripcion}}</td>
-                            <td>{{prd.precio}}</td>
+                            <td>{{prd.apePaterno}}</td>
+                            <td>{{prd.apeMaterno}}</td>
+                            <td>{{prd.direccion}}</td>
+                            <td>{{prd.telefono}}</td>
+                            <td>{{prd.ruc}}</td>
                             <td><button type="button" class="btn1" matTooltip="Click Edit Button"
                                     (click)='ProductDetailsToEdit(prd.id)'>Edit</button>
                                 |

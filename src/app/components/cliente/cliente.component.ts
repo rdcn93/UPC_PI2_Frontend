@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { ProductoService } from '../../services/producto.service';
-import { RolService } from '../../services/rol.service';
-import { Producto } from '../../models/producto';
+import { ClienteService } from '../../services/cliente.service';
+import { Cliente } from '../../models/cliente';
 import { Rol } from '../../models/rol';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -17,17 +16,16 @@ import { ToastrService } from 'ngx-toastr';
 export class ClienteComponent implements OnInit {
 
   Roles?: Observable<Rol[]>;
-  ProductList?: Observable<Producto[]>;
-  ProductList1?: Observable<Producto[]>;
+  ProductList?: Observable<Cliente[]>;
+  ProductList1?: Observable<Cliente[]>;
   productForm: any;
   massage = "";
   prodCategory = "";
-  ProductoId = 0;
-  nuevoProducto: boolean = true;
+  ClienteId = 0;
+  nuevoCliente: boolean = true;
 
   constructor(private formbulider: FormBuilder,
-     private productoService: ProductoService,
-     private rolService: RolService,
+     private ClienteService: ClienteService,
      private router: Router,
      private jwtHelper : JwtHelperService,private toastr: ToastrService) { }
 
@@ -35,25 +33,23 @@ export class ClienteComponent implements OnInit {
     this.prodCategory = "0";
     this.productForm = this.formbulider.group({
       nombre: ['', [Validators.required]],
-      descripcion: ['', [Validators.required]],
-      precio: ['', [Validators.required]],
-      idCategoria: ['', [Validators.required]],
-      idProveedor: ['', [Validators.required]]
+      apePaterno: ['', [Validators.required]],
+      apeMaterno: ['', [Validators.required]],
+      direccion: ['', [Validators.required]],
+      telefono: ['', [Validators.required]],
+      ruc: ['', [Validators.required]]
     });
-    this.getRolesList();
+    
     this.getProductList();
   }
-  getRolesList() {
-    this.Roles = this.rolService.getRoles();
-  }
   getProductList() {
-    this.ProductList1 = this.productoService.getProductos();
+    this.ProductList1 = this.ClienteService.getClientes();
     this.ProductList = this.ProductList1;
   }
-  PostProduct(product: Producto) {
+  PostProduct(product: Cliente) {
     const product_Master = this.productForm.value;
     
-    this.productoService.createProducto(product_Master).subscribe(
+    this.ClienteService.createCliente(product_Master).subscribe(
       () => {
         this.getProductList();
         this.productForm.reset();
@@ -62,20 +58,21 @@ export class ClienteComponent implements OnInit {
     );
   }
   ProductDetailsToEdit(id: number) {
-    this.nuevoProducto = false;
-    this.productoService.getProductoById(id).subscribe(productResult => {      
-      this.ProductoId = productResult.id;
+    this.nuevoCliente = false;
+    this.ClienteService.getClienteById(id).subscribe(productResult => {      
+      this.ClienteId = productResult.id;
       this.productForm.controls['nombre'].setValue(productResult.nombre);
-      this.productForm.controls['descripcion'].setValue(productResult.descripcion);
-      this.productForm.controls['precio'].setValue(productResult.precio);
-      this.productForm.controls['idCategoria'].setValue(productResult.idCategoria);
-      this.productForm.controls['idProveedor'].setValue(productResult.idProveedor);    
+      this.productForm.controls['apePaterno'].setValue(productResult.apePaterno);
+      this.productForm.controls['apeMaterno'].setValue(productResult.apeMaterno);
+      this.productForm.controls['direccion'].setValue(productResult.direccion);
+      this.productForm.controls['telefono'].setValue(productResult.telefono);    
+      this.productForm.controls['ruc'].setValue(productResult.ruc);    
     });
   }
-  UpdateProduct(user: Producto) {
-    user.id = this.ProductoId;
+  UpdateProduct(user: Cliente) {
+    user.id = this.ClienteId;
     const product_Master = this.productForm.value;
-    this.productoService.updateProducto(user).subscribe(() => {
+    this.ClienteService.updateCliente(user).subscribe(() => {
       this.toastr.success('Data Updated Successfully');
       this.productForm.reset();
       this.getProductList();
@@ -84,15 +81,15 @@ export class ClienteComponent implements OnInit {
 
   DeleteProduct(id: number) {
     if (confirm('Do you want to delete this product?')) {
-      this.productoService.deleteProducto(id).subscribe(() => {
+      this.ClienteService.deleteCliente(id).subscribe(() => {
         this.toastr.success('Data Deleted Successfully');
         this.getProductList();
       });
     }
   }
 
-  Clear(product: Producto){
-    this.nuevoProducto = true;
+  Clear(product: Cliente){
+    this.nuevoCliente = true;
     this.productForm.reset();
   }
 
