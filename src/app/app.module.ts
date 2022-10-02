@@ -1,8 +1,16 @@
 import { NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+
+import { HttpClientModule } from '@angular/common/http';
+import { JwtModule } from "@auth0/angular-jwt";
+import { AuthService } from './services/auth.service';
+import { ToastrModule } from 'ngx-toastr';
+
+import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStructAdapter } from '@ng-bootstrap/ng-bootstrap/datepicker/adapters/ngb-date-adapter';
 
 import {
   PERFECT_SCROLLBAR_CONFIG,
@@ -36,6 +44,7 @@ import {
   GridModule,
   HeaderModule,
   ListGroupModule,
+  ModalModule,
   NavModule,
   ProgressModule,
   SharedModule,
@@ -43,6 +52,10 @@ import {
   TabsModule,
   UtilitiesModule,
 } from '@coreui/angular';
+
+import { DataTablesModule } from "angular-datatables";
+
+import {NgbDatepicker} from '@ng-bootstrap/ng-bootstrap';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 
@@ -53,12 +66,17 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 const APP_CONTAINERS = [
   DefaultFooterComponent,
   DefaultHeaderComponent,
-  DefaultLayoutComponent,
+  DefaultLayoutComponent  
 ];
+
+export function tokenGetter() {
+  return localStorage.getItem("jwt");
+}
 
 @NgModule({
   declarations: [AppComponent, ...APP_CONTAINERS],
   imports: [
+    FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -73,10 +91,11 @@ const APP_CONTAINERS = [
     PerfectScrollbarModule,
     NavModule,
     ButtonModule,
+    ModalModule,
     FormModule,
     UtilitiesModule,
     ButtonGroupModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule,    
     SidebarModule,
     SharedModule,
     TabsModule,
@@ -85,6 +104,18 @@ const APP_CONTAINERS = [
     BadgeModule,
     ListGroupModule,
     CardModule,
+    HttpClientModule,
+    ToastrModule,
+    DataTablesModule,
+    // RouterModule.forRoot(routes),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:7133"],
+        disallowedRoutes: []
+      }
+    }),
+    ToastrModule.forRoot()
   ],
   providers: [
     {
@@ -96,7 +127,8 @@ const APP_CONTAINERS = [
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
     },
     IconSetService,
-    Title
+    Title,
+    AuthService
   ],
   bootstrap: [AppComponent],
 })

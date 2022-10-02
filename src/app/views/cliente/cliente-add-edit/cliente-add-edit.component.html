@@ -1,0 +1,76 @@
+<form class="form-horizontal" [formGroup]="productForm">
+  <h1 style="text-align: center;">{{this.titulo}}</h1>
+  <br />
+  <div> 
+    <c-row class="g-3">
+      <c-col [md]="4">
+        <label cLabel for="inputNombre">Nombre:</label>
+        <input cFormControl id="inputNombre" type="text" formControlName="nombre" placeholder="Nombre" />
+      </c-col>
+      <c-col [md]="4">
+        <label cLabel for="inputApePaterno">Apellido Paterno:</label>
+        <input cFormControl id="inputApePaterno" type="text" formControlName="apePaterno"
+          placeholder="Apellido Paterno" />
+      </c-col>
+      <c-col [md]="4">
+        <label cLabel for="inputPassword4">Apellido Materno:</label>
+        <input cFormControl id="inputPassword4" type="text" formControlName="apeMaterno"
+          placeholder="Apellido Materno" />
+      </c-col>
+    </c-row>
+    <br />
+    <c-row class="g-3">
+      <c-col [md]="8">
+        <label cLabel for="inputNombre">Dirección:</label>
+        <input cFormControl id="inputNombre" type="text" formControlName="direccion" placeholder="Dirección" />
+      </c-col>
+      <c-col [md]="4">
+        <label cLabel for="inputApePaterno">Telefono:</label>
+        <input cFormControl id="inputApePaterno" type="text" formControlName="telefono" placeholder="Telefono" />
+      </c-col>
+    </c-row>
+    <br />
+    <c-row class="g-3">
+      <c-col [md]="4">
+        <label cLabel for="roles">Tipo de Documento:</label>
+        <div >
+          <select class="form-select" id="roles" formControlName="idTipoDocumento" placeholder="Tipo de Documento">
+            <option *ngFor="let tipo of TipoDocumentos | async; let i = index" [value]="tipo.id">
+              {{tipo.nombre}}
+            </option>
+          </select>
+        </div>
+      </c-col>
+      <c-col [md]="4">
+        <label cLabel for="inputNumDocumento">Número de Documento:</label>
+        <input cFormControl id="inputNumDocumento" type="text" formControlName="numeroDocumento"
+          placeholder="Número de Documento" />
+      </c-col>
+    </c-row>
+    <br />
+    <div class="form-group">
+      <c-form-check sizing="xl" switch>
+        <input cFormCheckInput checked type="checkbox" formControlName="enviarPromociones" />
+        <label cFormCheckLabel>Enviar correo de Promociones</label>
+      </c-form-check>
+    </div>
+    <br />
+    <div class="form-group">
+      <div class="container">
+        <div class="row">
+          <div *ngIf="nuevoCliente" class="col-sm">
+            <button type="submit" class="btn btn-primary" (click)="PostProduct(productForm.value)">Registrar</button>
+          </div>
+          <div *ngIf="!nuevoCliente" class="col-sm">
+            <button type="submit" class="btn btn-primary" (click)="UpdateProduct(productForm.value)">Actualizar</button>
+          </div>
+          <div class="col-sm">
+            <!-- <button type="submit" class="btn btn-primary" (click)="Clear(productForm.value)">Clear</button> -->
+            <a routerLink="/cliente" cButton color="danger">Cancelar</a>
+          </div>
+        </div>
+      </div>
+      <br />
+    </div>
+  </div>
+</form>

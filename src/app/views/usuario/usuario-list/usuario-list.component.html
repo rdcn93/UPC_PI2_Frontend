@@ -1,0 +1,55 @@
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Agregar Usuario</a>
+
+<div>
+    <div class="alert alert-success" style="text-align: center;"><b>Usuarios</b></div>
+    <div class="table-responsive" style="text-align: center;">
+      <!-- <table datatable [dtOptions]="dtOptions" class="row-border hover"> -->
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Usuario</th>
+          <th scope="col">Correo</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Ape. Paterno</th>
+          <th scope="col">Ape. Materno</th>
+          <th scope="col">Telefono</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prd of ProductList | async; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{prd.usuario}}</td>
+          <td>{{prd.correo}}</td>
+          <td>{{prd.nombre}}</td>
+          <td>{{prd.apePaterno}}</td>
+          <td>{{prd.apeMaterno}}</td>
+          <td>{{prd.telefono}}</td>
+          <td>
+            <a routerLink="edit/{{prd.id}}" cButton color="primary">Editar</a>
+            |
+            <button type="button" cButton color="danger" (click)="DeleteProduct(prd.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- <button [cModalToggle]="verticallyCenteredModal.id" cButton>Centered modal</button>
+<c-modal #verticallyCenteredModal alignment="center" id="verticallyCenteredModal">
+  <c-modal-header>
+    <h5 cModalTitle>Eliminar Usuario</h5>
+    <button [cModalToggle]="verticallyCenteredModal.id" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    Seguro de Eliminar este Usuario?
+  </c-modal-body>
+  <c-modal-footer>
+    <button [cModalToggle]="verticallyCenteredModal.id" cButton color="secondary">
+      Close
+    </button>
+    <button cButton color="primary">Understood</button>
+  </c-modal-footer>
+</c-modal> -->

@@ -1,0 +1,66 @@
+<form class="form-horizontal" [formGroup]="productForm">
+  <h1 style="text-align: center;">{{this.titulo}}</h1>
+  <div>
+    <c-row class="g-3">
+      <c-col [md]="4">
+        <label cLabel for="inputNombre">Nombre:</label>
+        <input cFormControl id="inputNombre" type="text" formControlName="nombre" placeholder="Nombre" />
+      </c-col>
+      <c-col [md]="8">
+        <label cLabel for="inputDescripcion">Descripción:</label>
+        <input cFormControl id="inputDescripcion" type="text" formControlName="descripcion" placeholder="Descripción" />
+      </c-col>
+    </c-row>
+    <br />
+    <c-row class="g-3">
+      <c-col [md]="4">
+        <label cLabel for="inputFechaInicio">Fecha Inicio:</label>
+        <input cFormControl id="inputFechaInicio" type="text" formControlName="fecInicio" placeholder="Fecha Inicio" />
+      </c-col>
+      <c-col [md]="4">
+        <label cLabel for="inputFechaFin">Fecha Fin:</label>
+        <input cFormControl id="inputFechaFin" type="text" formControlName="fecFin" placeholder="Fecha Fin" />
+      </c-col>
+      <c-col [md]="2">
+        <label cLabel for="inputPorcentaje">Porcentaje:</label>
+        <input cFormControl id="inputPorcentaje" type="number" formControlName="porcentajeDescuento"
+          placeholder="Porcentaje" />
+      </c-col>
+    </c-row>
+    <br />
+    <c-row>
+      <c-col [md]="8">
+        <label cLabel for="inputPorcentaje">Porcentaje:</label>
+        <ng-multiselect-dropdown 
+              i18n-placeholder 
+              placeholder="Seleccione" 
+              name="estado" 
+              [settings]="dropdownSettingsProducto" 
+              [data]="lstProductos"
+              (onSelect)="onItemSelectProducto($event)" 
+              formControlName="selectedItemProducto"              
+              (onDropDownClose)="onDropDownCloseEstado()"
+              >
+        </ng-multiselect-dropdown>
+      </c-col>
+    </c-row>
+    <br />
+    <div class="form-group">
+      <div class="container">
+        <div class="row">
+          <div *ngIf="nuevoPromocion" class="col-sm">
+            <button type="submit" class="btn btn-primary" (click)="PostProduct(productForm.value)">Registrar</button>
+          </div>
+          <div *ngIf="!nuevoPromocion" class="col-sm">
+            <button type="submit" class="btn btn-primary" (click)="UpdateProduct(productForm.value)">Actualizar</button>
+          </div>
+          <div class="col-sm">
+            <!-- <button type="submit" class="btn btn-primary" (click)="Clear(productForm.value)">Clear</button> -->
+            <a routerLink="/promocion" cButton color="danger">Cancelar</a>
+          </div>
+        </div>
+      </div>
+      <br />
+    </div>
+  </div>
+</form>

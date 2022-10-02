@@ -6,70 +6,90 @@ import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
+import { AuthService } from './services/auth.service';
+import { UsuarioListComponent } from './views/usuario/usuario-list/usuario-list.component';
+import { UsuarioAddEditComponent } from './views/usuario/usuario-add-edit/usuario-add-edit.component';
+import { FogotPasswordComponent } from './views/pages/fogot-password/fogot-password.component';
+import { ResetPasswordComponent } from './views/pages/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'usuario',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
     path: '',
     component: DefaultLayoutComponent,
     data: {
-      title: 'Home'
+      title: 'Inicio'
     },
     children: [
       {
-        path: 'dashboard',
+        path: 'homepage', canActivate: [AuthService],
         loadChildren: () =>
-          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
+          import('./views/homepage/homepage.module').then((m) => m.HomepageModule)
       },
       {
-        path: 'usuario',
+        path: 'almacen', canActivate: [AuthService],
         loadChildren: () =>
-          import('./components/usuario/usuario.module').then((m) => m.UsuarioModule)
+          import('./views/almacen/almacen.module').then((m) => m.AlmacenModule)
       },
-      // {
-      //   path: 'theme',
-      //   loadChildren: () =>
-      //     import('./views/theme/theme.module').then((m) => m.ThemeModule)
-      // },
-      // {
-      //   path: 'base',
-      //   loadChildren: () =>
-      //     import('./views/base/base.module').then((m) => m.BaseModule)
-      // },
-      // {
-      //   path: 'buttons',
-      //   loadChildren: () =>
-      //     import('./views/buttons/buttons.module').then((m) => m.ButtonsModule)
-      // },
-      // {
-      //   path: 'forms',
-      //   loadChildren: () =>
-      //     import('./views/forms/forms.module').then((m) => m.CoreUIFormsModule)
-      // },
-      // {
-      //   path: 'charts',
-      //   loadChildren: () =>
-      //     import('./views/charts/charts.module').then((m) => m.ChartsModule)
-      // },
-      // {
-      //   path: 'icons',
-      //   loadChildren: () =>
-      //     import('./views/icons/icons.module').then((m) => m.IconsModule)
-      // },
-      // {
-      //   path: 'notifications',
-      //   loadChildren: () =>
-      //     import('./views/notifications/notifications.module').then((m) => m.NotificationsModule)
-      // },
-      // {
-      //   path: 'widgets',
-      //   loadChildren: () =>
-      //     import('./views/widgets/widgets.module').then((m) => m.WidgetsModule)
-      // },
+      {
+        path: 'cliente', canActivate: [AuthService],
+        loadChildren: () =>
+          import('./views/cliente/cliente.module').then((m) => m.ClienteModule)
+      },
+      {
+        path: 'producto', canActivate: [AuthService],
+        loadChildren: () =>
+          import('./views/producto/producto.module').then((m) => m.ProductoModule)
+      },
+      {
+        path: 'proveedor', canActivate: [AuthService],
+        loadChildren: () =>
+          import('./views/proveedor/proveedor.module').then((m) => m.ProveedorModule)
+      },
+      {
+        path: 'promocion', canActivate: [AuthService],
+        loadChildren: () =>
+          import('./views/promocion/promocion.module').then((m) => m.PromocionModule)
+      },
+      {
+        path: 'reclamo', canActivate: [AuthService],
+        loadChildren: () =>
+          import('./views/reclamo/reclamo.module').then((m) => m.ReclamoModule)
+      },
+      {
+        path: 'usuario', canActivate: [AuthService],
+        loadChildren: () =>
+          import('./views/usuario/usuario.module').then((m) => m.UsuarioModule)
+      },
+      {
+        path: 'consultapedidos', canActivate: [AuthService],
+        loadChildren: () =>
+          import('./views/consulta-pedidos/consulta-pedidos.module').then((m) => m.ConsultaPedidosModule)
+      },
+      {
+        path: 'consultastock', canActivate: [AuthService],
+        loadChildren: () =>
+          import('./views/consulta-stock/consulta-stock.module').then((m) => m.ConsultaStockModule)
+      },
+      {
+        path: 'consultaventas', canActivate: [AuthService],
+        loadChildren: () =>
+          import('./views/consulta-ventas/consulta-ventas.module').then((m) => m.ConsultaVentasModule)
+      },
+      {
+        path: 'consultareclamos', canActivate: [AuthService],
+        loadChildren: () =>
+          import('./views/consulta-reclamos/consulta-reclamos.module').then((m) => m.ConsultaReclamosModule)
+      },
+      {
+        path: 'consultadelivery', canActivate: [AuthService],
+        loadChildren: () =>
+          import('./views/consulta-delivery/consulta-delivery.module').then((m) => m.ConsultaDeliveryModule)
+      },
       {
         path: 'pages',
         loadChildren: () =>
@@ -105,6 +125,20 @@ const routes: Routes = [
       title: 'Register Page'
     }
   },
+  {
+    path: 'forgot-password',
+    component: FogotPasswordComponent,
+    data: {
+      title: 'Olvidaste tu Contraseña'
+    }
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent,
+    data: {
+      title: 'Restaurar Contraseña'
+    }
+  },
   {path: '**', redirectTo: 'usuario'}
 ];
 
@@ -116,6 +150,7 @@ const routes: Routes = [
         // relativeLinkResolution: 'legacy'
       }
     )],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers:[AuthService]
 })
 export class AppRoutingModule { }

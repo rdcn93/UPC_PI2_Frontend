@@ -1,0 +1,38 @@
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Agregar Proveedor</a>
+
+<div>
+    <div class="alert alert-success" style="text-align: center;"><b>Proveedores</b></div>
+    <div class="table-responsive" style="text-align: center;">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Dirección</th>
+          <th scope="col">Telefono</th>
+          <th scope="col">RUC</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prd of ProveedorList | async; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{prd.nombre}}</td>
+          <td>{{prd.descripcion}}</td>
+          <td>{{prd.direccion}}</td>
+          <td>{{prd.telefono}}</td>
+          <td>{{prd.numeroDocumento}}</td>
+          <td>
+            <a routerLink="edit/{{prd.id}}" cButton color="primary">Editar</a>
+            <!-- <button type="button" class="btn1" matTooltip="Click Edit Button" (click)='ProductDetailsToEdit(prd.id)'>Edit</button> -->
+            <!-- <a routerLink="edit/{{prd.id}}" class="btn btn-sm btn-primary mr-1">Edit</a> -->
+            |
+            <button type="button" cButton color="danger" (click)="DeleteProduct(prd.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+      </table>
+    </div>
+  </div>
+  

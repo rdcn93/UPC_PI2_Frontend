@@ -1,0 +1,69 @@
+<form class="form-horizontal" [formGroup]="productForm">
+  <h1 style="text-align: center;">{{this.titulo}}</h1>
+  <div>    
+    <c-row class="g-3">
+      <c-col *ngIf="nuevoUsuario" [md]="4">
+        <label cLabel for="inputUsuario">Usuario:</label>
+        <input cFormControl id="inputNombre" type="text" formControlName="usuario" placeholder="Usuario" />
+      </c-col>
+      <c-col *ngIf="nuevoUsuario" [md]="4">
+        <label cLabel for="inputClave">Clave:</label>
+        <input cFormControl id="inputClave" type="password" formControlName="clave" placeholder="Clave" />
+      </c-col>
+    </c-row>
+    <br />
+    <c-row class="g-3">
+      <c-col [md]="4">
+        <label cLabel for="inputNombre">Nombre:</label>
+        <input cFormControl id="inputNombre" type="text" formControlName="nombre" placeholder="Nombre" />
+      </c-col>
+      <c-col [md]="4">
+        <label cLabel for="inputApePaterno">Apellido Paterno:</label>
+        <input cFormControl id="inputApePaterno" type="text" formControlName="apePaterno"
+          placeholder="Apellido Paterno" />
+      </c-col>
+      <c-col [md]="4">
+        <label cLabel for="inputPassword4">Apellido Materno:</label>
+        <input cFormControl id="inputPassword4" type="text" formControlName="apeMaterno"
+          placeholder="Apellido Materno" />
+      </c-col>
+    </c-row>
+    <br />
+    <c-row class="g-3">
+      <c-col [md]="4">
+        <label cLabel for="inputCorreo">Correo:</label>
+        <input cFormControl id="inputCorreo" type="email" formControlName="correo" placeholder="Correo" />
+      </c-col>
+      <c-col [md]="4">
+        <label cLabel for="inputTel">Telefono:</label>
+        <input cFormControl id="inputTel" type="tel" formControlName="telefono" placeholder="Telefono" />
+      </c-col>
+      <c-col [md]="4">
+        <label cLabel for="cboRoles">Rol</label>
+        <select cSelect id="cboRoles" formControlName="idRol">
+          <option *ngFor="let rol of Roles | async; let i = index" [value]="rol.id">
+            {{rol.nombre}}
+          </option>
+        </select>
+      </c-col>
+    </c-row>
+    <br />    
+    <div class="form-group">
+      <div class="container">
+        <div class="row">
+          <div *ngIf="nuevoUsuario" class="col-sm">
+            <button type="submit" class="btn btn-primary" (click)="PostProduct(productForm.value)">Registrar</button>
+          </div>
+          <div *ngIf="!nuevoUsuario" class="col-sm">
+            <button type="submit" class="btn btn-primary" (click)="UpdateProduct(productForm.value)">Actualizar</button>
+          </div>
+          <div class="col-sm">
+            <!-- <button type="submit" class="btn btn-primary" (click)="Clear(productForm.value)">Clear</button> -->
+            <a routerLink="/usuario" cButton color="danger">Cancelar</a>
+          </div>
+        </div>
+      </div>
+      <br />
+    </div>
+  </div>
+</form>

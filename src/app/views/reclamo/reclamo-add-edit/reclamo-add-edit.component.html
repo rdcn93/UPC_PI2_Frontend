@@ -1,0 +1,60 @@
+<form class="form-horizontal" [formGroup]="productForm">
+    <h1 style="text-align: center;">{{this.titulo}}</h1>
+    <div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">Usuario Registro:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="txtProductName" formControlName="idUsuario"
+          placeholder="Usuario">
+      </div>
+    </div>
+    <br />    
+    <div class="form-group">
+      <div class="mb-3">
+        <label cLabel for="exampleFormControlTextarea1">Detalle</label>
+        <textarea cFormControl id="exampleFormControlTextarea1" rows="3" formControlName="detalle" placeholder="Detalle"></textarea>
+        </div>
+    </div>    
+    <br />
+    <div class="form-group">
+      <label cLabel for="cboRoles">Tipo de Reclamo</label>
+        <select cSelect id="cboRoles" formControlName="idTipoReclamo">
+          <option *ngFor="let rol of TiposReclamo | async; let i = index" [value]="rol.id">
+            {{rol.nombre}}
+          </option>
+        </select>
+    </div>
+    <br />
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">Pedido:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="txtProductCost" formControlName="idPedido" placeholder="Pedido">
+      </div>
+    </div>
+    <br />
+    <div class="form-group" *ngIf="!nuevoReclamo">
+      <div class="mb-3">
+        <label cLabel for="exampleFormControlTextarea1">Respuesta</label>
+        <textarea cFormControl id="exampleFormControlTextarea1" rows="3" formControlName="respuesta" placeholder="Respuesta"></textarea>
+        </div>
+    </div>    
+    <br />
+     <div class="form-group">
+      <div class="container">
+        <div class="row">
+          <div *ngIf="nuevoReclamo" class="col-sm">
+            <button type="submit" class="btn btn-primary" (click)="PostProduct(productForm.value)">Registrar</button> 
+          </div>
+          <div *ngIf="!nuevoReclamo" class="col-sm">
+            <button type="submit" class="btn btn-primary" (click)="UpdateProduct(productForm.value)">Actualizar</button>
+          </div>
+          <div class="col-sm">
+            <!-- <button type="submit" class="btn btn-primary" (click)="Clear(productForm.value)">Clear</button> -->
+            <a routerLink="/Reclamo" cButton color="danger">Cancelar</a>
+          </div>
+        </div>
+      </div>
+    <br />
+    </div>    
+    </div>
+  </form>
