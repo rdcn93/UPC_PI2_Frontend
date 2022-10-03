@@ -24,6 +24,7 @@ export class ProductoService {
     }
   
     public createProducto(Producto: Producto): Observable<Producto[]> {
+      console.log(Producto);
       return this.http.post<Producto[]>(
         `${environment.apiUrl}/${this.url}`,
         Producto
