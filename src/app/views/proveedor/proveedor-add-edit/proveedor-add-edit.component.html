@@ -1,0 +1,71 @@
+<form class="form-horizontal" [formGroup]="productForm">
+    <h1 style="text-align: center;">{{this.titulo}}</h1>
+    <div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">Nombre:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="txtProductName" formControlName="nombre"
+          placeholder="Usuario">
+      </div>
+    </div>
+    <br />    
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">Descripción :</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="txtProductDescription" formControlName="descripcion"
+          placeholder="Descripción">
+      </div>
+    </div>
+    
+    <br />
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">Dirección:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="txtProductCost" formControlName="direccion" placeholder="Dirección">
+      </div>
+    </div>
+    <br />
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">Telefono:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="txtStock" formControlName="telefono" placeholder="Telefono">
+      </div>
+    </div>
+    <br />
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">Tipo de Documento:</label>
+      <div class="col-sm-10">
+        <select class="form-select" id="roles" formControlName="idTipoDocumento">
+          <option *ngFor="let tipo of TipoDocumentos | async; let i = index" [value]="tipo.id">
+            {{tipo.nombre}}
+          </option>
+        </select>
+      </div>
+    </div>  
+    <br />
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">Número de Documento:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="txtStock" formControlName="numeroDocumento" placeholder="Número de Documento">
+      </div>
+    </div>       
+    <br />
+     <div class="form-group">
+      <div class="container">
+        <div class="row">
+          <div *ngIf="nuevoProveedor" class="col-sm">
+            <button type="submit" class="btn btn-primary" (click)="PostProduct(productForm.value)">Registrar</button> 
+          </div>
+          <div *ngIf="!nuevoProveedor" class="col-sm">
+            <button type="submit" class="btn btn-primary" (click)="UpdateProduct(productForm.value)">Actualizar</button>
+          </div>
+          <div class="col-sm">
+            <!-- <button type="submit" class="btn btn-primary" (click)="Clear(productForm.value)">Clear</button> -->
+            <a routerLink="/proveedor" cButton color="danger">Cancelar</a>
+          </div>
+        </div>
+      </div>
+    <br />
+    </div>    
+    </div>
+  </form>

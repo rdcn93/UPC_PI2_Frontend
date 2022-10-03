@@ -5,5 +5,7 @@ export class Cliente {
     apeMaterno = "";
     telefono = "";
     direccion = "";
-    ruc = "";
+    idTipoDocumento = 0;
+    numeroDocumento = "";
+    enviarPromociones = false;
 }

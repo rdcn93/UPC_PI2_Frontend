@@ -1,31 +1,72 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule, Title } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { HttpClientModule } from '@angular/common/http';
+import { JwtModule } from "@auth0/angular-jwt";
+import { AuthService } from './services/auth.service';
+import { ToastrModule } from 'ngx-toastr';
+
+import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStructAdapter } from '@ng-bootstrap/ng-bootstrap/datepicker/adapters/ngb-date-adapter';
+
+import {
+  PERFECT_SCROLLBAR_CONFIG,
+  PerfectScrollbarConfigInterface,
+  PerfectScrollbarModule,
+} from 'ngx-perfect-scrollbar';
+
+// Import routing module
 import { AppRoutingModule } from './app-routing.module';
+
+// Import app component
 import { AppComponent } from './app.component';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
-import { JwtModule } from "@auth0/angular-jwt";
-import { AuthGuard } from './auth/auth.service';
-import { HomepageComponent } from './components/homepage/homepage.component';
-import { LoginComponent } from './components/login/login.component';
-import { ToastrModule } from 'ngx-toastr';
-import { HttpClientModule } from '@angular/common/http';
-import { UsuarioComponent } from './components/usuario/usuario.component';
-import { ProductoComponent } from './components/producto/producto.component';
-import { AlmacenComponent } from './components/almacen/almacen.component';
-import { ClienteComponent } from './components/cliente/cliente.component';
-import { ProveedorComponent } from './components/proveedor/proveedor.component';
+// Import containers
+import {
+  DefaultFooterComponent,
+  DefaultHeaderComponent,
+  DefaultLayoutComponent,
+} from './containers';
 
-const routes: Routes = [
-  { path: '', component: HomepageComponent },
-  { path: 'almacen', component: AlmacenComponent, canActivate: [AuthGuard] },
-  { path: 'cliente', component: ClienteComponent, canActivate: [AuthGuard] },
-  { path: 'producto', component: ProductoComponent, canActivate: [AuthGuard] },
-  { path: 'proveedor', component: ProveedorComponent, canActivate: [AuthGuard] },
-  { path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
+import {
+  AvatarModule,
+  BadgeModule,
+  BreadcrumbModule,
+  ButtonGroupModule,
+  ButtonModule,
+  CardModule,
+  DropdownModule,
+  FooterModule,
+  FormModule,
+  GridModule,
+  HeaderModule,
+  ListGroupModule,
+  ModalModule,
+  NavModule,
+  ProgressModule,
+  SharedModule,
+  SidebarModule,
+  TabsModule,
+  UtilitiesModule,
+} from '@coreui/angular';
+
+import { DataTablesModule } from "angular-datatables";
+
+import {NgbDatepicker} from '@ng-bootstrap/ng-bootstrap';
+
+import { IconModule, IconSetService } from '@coreui/icons-angular';
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true,
+};
+
+const APP_CONTAINERS = [
+  DefaultFooterComponent,
+  DefaultHeaderComponent,
+  DefaultLayoutComponent  
 ];
 
 export function tokenGetter() {
@@ -33,23 +74,40 @@ export function tokenGetter() {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomepageComponent,
-    LoginComponent,
-    UsuarioComponent,
-    ProductoComponent,
-    AlmacenComponent,
-    ClienteComponent,
-    ProveedorComponent
-  ],
+  declarations: [AppComponent, ...APP_CONTAINERS],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot(routes),
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    AvatarModule,
+    BreadcrumbModule,
+    FooterModule,
+    DropdownModule,
+    GridModule,
+    HeaderModule,
+    SidebarModule,
+    IconModule,
+    PerfectScrollbarModule,
+    NavModule,
+    ButtonModule,
+    ModalModule,
+    FormModule,
+    UtilitiesModule,
+    ButtonGroupModule,
+    ReactiveFormsModule,    
+    SidebarModule,
+    SharedModule,
+    TabsModule,
+    ListGroupModule,
+    ProgressModule,
+    BadgeModule,
+    ListGroupModule,
+    CardModule,
+    HttpClientModule,
+    ToastrModule,
+    DataTablesModule,
+    // RouterModule.forRoot(routes),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -59,7 +117,20 @@ export function tokenGetter() {
     }),
     ToastrModule.forRoot()
   ],
-  providers: [AuthGuard],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy,
+    },
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+    },
+    IconSetService,
+    Title,
+    AuthService
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}

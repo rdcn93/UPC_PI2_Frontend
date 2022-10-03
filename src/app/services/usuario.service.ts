@@ -24,7 +24,7 @@ export class UsuarioService {
     }
   
     public createUsuario(usuario: Usuario): Observable<Usuario[]> {
-      console.log(usuario);
+      
       return this.http.post<Usuario[]>(
         `${environment.apiUrl}/${this.url}`,
         usuario

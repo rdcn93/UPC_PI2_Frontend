@@ -5,6 +5,4 @@ export class Producto {
     precio : number = 0.0;
     idCategoria : number = 0;
     idProveedor : number = 0;
-    fecRegistro?: Date;
-    fecModificacion?: Date;
 }
