@@ -7,4 +7,5 @@ export class Reclamo {
     tipoReclamo = "";
     detalle = "";    
     respuesta = "";
+    estadoReclamo = 0;
 }

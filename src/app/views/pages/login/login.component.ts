@@ -24,18 +24,21 @@ export class LoginComponent {
   constructor(private router: Router, private http: HttpClient,private jwtHelper : JwtHelperService) { }
 
   public login = (form: NgForm) => {
+    
     const credentials = JSON.stringify(form.value);
     this.http.post(this.url +"login", credentials, {
       headers: new HttpHeaders({
-        "Content-Type": "application/json"
+        "Content-Type": "application/json; charset=utf-8s"
       })
     }).subscribe(response => {
+      
       const token = (<any>response).token;
       localStorage.setItem("jwt", token);
       this.invalidLogin = false;
       // this.toastr.success("Logged In successfully");
       this.router.navigate(["/usuario"]);
     }, err => {
+      
       this.invalidLogin = true;
       this.showError = true;
       this.errorMessage = err.error;

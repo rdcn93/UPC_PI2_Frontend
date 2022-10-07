@@ -20,10 +20,11 @@
           <th scope="row">{{ i + 1 }}</th>
           <td>{{prd.idUsuario}}</td>
           <td>{{prd.idPedido}}</td>
-          <td>{{prd.idTipoReclamo}}</td>
+          <td>{{prd.tipoReclamo}}</td>
           <td>{{prd.detalle}}</td>
-          <td>{{prd.respuesta}}</td>
+          <td>{{prd.respuesta}}</td>          
           <td>
+            <!-- <a *ngIf="prd.estadoReclamo == 1" routerLink="edit/{{prd.id}}" cButton color="primary">Editar</a> -->
             <a routerLink="edit/{{prd.id}}" cButton color="primary">Editar</a>
             <!-- <button type="button" class="btn1" matTooltip="Click Edit Button" (click)='ProductDetailsToEdit(prd.id)'>Edit</button> -->
             <!-- <a routerLink="edit/{{prd.id}}" class="btn btn-sm btn-primary mr-1">Edit</a> -->

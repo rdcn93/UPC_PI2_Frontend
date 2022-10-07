@@ -4,15 +4,33 @@
   <div> 
     <c-row class="g-3">
       <c-col [md]="4">
+        <label cLabel for="roles">Tipo de Documento:</label>
+        <div >
+          <select class="form-select" id="roles" formControlName="idTipoDocumento" placeholder="Tipo de Documento" (ngModelChange)="validarTipoDocumento($event)">
+            <option *ngFor="let tipo of TipoDocumentos | async; let i = index" [value]="tipo.id">
+              {{tipo.nombre}}
+            </option>
+          </select>
+        </div>
+      </c-col>
+      <c-col [md]="4">
+        <label cLabel for="inputNumDocumento">Número de Documento:</label>
+        <input cFormControl id="inputNumDocumento" type="text" formControlName="numeroDocumento"
+          placeholder="Número de Documento" />
+      </c-col>
+    </c-row>
+    <br />
+    <c-row class="g-3">
+      <c-col [md]="4">
         <label cLabel for="inputNombre">Nombre:</label>
         <input cFormControl id="inputNombre" type="text" formControlName="nombre" placeholder="Nombre" />
       </c-col>
-      <c-col [md]="4">
+      <c-col [md]="4" *ngIf="!docEsRuc">
         <label cLabel for="inputApePaterno">Apellido Paterno:</label>
         <input cFormControl id="inputApePaterno" type="text" formControlName="apePaterno"
           placeholder="Apellido Paterno" />
       </c-col>
-      <c-col [md]="4">
+      <c-col [md]="4" *ngIf="!docEsRuc">
         <label cLabel for="inputPassword4">Apellido Materno:</label>
         <input cFormControl id="inputPassword4" type="text" formControlName="apeMaterno"
           placeholder="Apellido Materno" />
@@ -27,24 +45,6 @@
       <c-col [md]="4">
         <label cLabel for="inputApePaterno">Telefono:</label>
         <input cFormControl id="inputApePaterno" type="text" formControlName="telefono" placeholder="Telefono" />
-      </c-col>
-    </c-row>
-    <br />
-    <c-row class="g-3">
-      <c-col [md]="4">
-        <label cLabel for="roles">Tipo de Documento:</label>
-        <div >
-          <select class="form-select" id="roles" formControlName="idTipoDocumento" placeholder="Tipo de Documento">
-            <option *ngFor="let tipo of TipoDocumentos | async; let i = index" [value]="tipo.id">
-              {{tipo.nombre}}
-            </option>
-          </select>
-        </div>
-      </c-col>
-      <c-col [md]="4">
-        <label cLabel for="inputNumDocumento">Número de Documento:</label>
-        <input cFormControl id="inputNumDocumento" type="text" formControlName="numeroDocumento"
-          placeholder="Número de Documento" />
       </c-col>
     </c-row>
     <br />

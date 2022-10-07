@@ -21,7 +21,7 @@ import {
 } from '@coreui/angular';
 import { PromocionListComponent } from './promocion-list/promocion-list.component';
 import { PromocionAddEditComponent } from './promocion-add-edit/promocion-add-edit.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   imports: [
     PromocionRoutingModule,
@@ -40,7 +40,8 @@ import { PromocionAddEditComponent } from './promocion-add-edit/promocion-add-ed
     IconModule,
     ReactiveFormsModule,
     CommonModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    NgbModule
   ],
   declarations: [PromocionComponent, PromocionListComponent, PromocionAddEditComponent]
 })

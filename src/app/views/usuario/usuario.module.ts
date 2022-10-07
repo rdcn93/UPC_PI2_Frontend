@@ -23,7 +23,7 @@ import { UsuarioAddEditComponent } from './usuario-add-edit/usuario-add-edit.com
 import { UsuarioListComponent } from './usuario-list/usuario-list.component';
 
 import { DataTablesModule } from "angular-datatables";
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   imports: [
     UsuarioRoutingModule,
@@ -43,7 +43,8 @@ import { DataTablesModule } from "angular-datatables";
     IconModule,
     ReactiveFormsModule,
     CommonModule,
-    DataTablesModule
+    DataTablesModule,
+    NgbModule
   ],
   declarations: [UsuarioComponent, 
     UsuarioAddEditComponent, 

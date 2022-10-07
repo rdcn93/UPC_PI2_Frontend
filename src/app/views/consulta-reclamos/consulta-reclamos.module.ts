@@ -42,7 +42,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     IconModule,
     ReactiveFormsModule,
     CommonModule,
-    NgbModule
+    NgbModule,
+    ToastrModule
   ],
   declarations: [ConsultaReclamosComponent
   ]

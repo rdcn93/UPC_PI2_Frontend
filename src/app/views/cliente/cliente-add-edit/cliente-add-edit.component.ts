@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -23,6 +23,7 @@ export class ClienteAddEditComponent implements OnInit {
   ClienteId = 0;
   titulo = "Registrar Cliente";
   tipoDocId = 0;
+  docEsRuc: boolean = true;
 
   constructor(
     private formbulider: FormBuilder,
@@ -45,7 +46,7 @@ export class ClienteAddEditComponent implements OnInit {
 
     this.productForm = this.formbulider.group({
       nombre: ['', [Validators.required]],
-      apePaterno: ['', [Validators.required]],
+      apePaterno:  ['', [Validators.required]],
       apeMaterno: ['', [Validators.required]],
       telefono: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
@@ -53,6 +54,8 @@ export class ClienteAddEditComponent implements OnInit {
       numeroDocumento: ['', [Validators.required]],
       enviarPromociones: ['', ''],
     });
+
+    this.validarTipoDocumento(this.ClienteId);
 
     this.getTipoDocumentosList();
 
@@ -65,10 +68,10 @@ export class ClienteAddEditComponent implements OnInit {
   }
 
   PostProduct(product: Cliente) {
+    
     if(this.productForm.invalid){
       alert("Formulario incorrecto");
       return;
-
     }
     const product_Master = this.productForm.value;
     
@@ -107,6 +110,10 @@ export class ClienteAddEditComponent implements OnInit {
   }
 
   UpdateProduct(Cliente: Cliente) {
+    if(this.productForm.invalid){
+      alert("Formulario incorrecto");
+      return;
+    }
     Cliente.id = this.ClienteId;
     const product_Master = this.productForm.value;
   
@@ -119,6 +126,21 @@ export class ClienteAddEditComponent implements OnInit {
         this.toastr.error(err.error);
       }
     });
+  }
+
+  validarTipoDocumento(tipoDocSelected : any) {
+    if(tipoDocSelected == 1){
+      this.docEsRuc = true;
+      this.productForm.get('apePaterno').clearValidators();
+      this.productForm.get('apeMaterno').clearValidators();
+
+      this.productForm.controls['apePaterno'].setValue('');
+      this.productForm.controls['apeMaterno'].setValue('');
+    }else{
+      this.docEsRuc = false;
+      this.productForm.get('apePaterno').addValidators(Validators.required);
+      this.productForm.get('apeMaterno').addValidators(Validators.required);
+    }
   }
 
   isUserAuthenticated() {

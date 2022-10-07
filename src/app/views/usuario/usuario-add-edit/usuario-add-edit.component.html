@@ -1,53 +1,144 @@
 <form class="form-horizontal" [formGroup]="productForm">
   <h1 style="text-align: center;">{{this.titulo}}</h1>
-  <div>    
+  <div>
+    <c-row>
+      <ngb-alert #selfClosingAlert *ngIf="successMessageSuccess" type="success" (closed)="successMessageSuccess = ''">{{
+        successMessageSuccess }}
+      </ngb-alert>
+      <ngb-alert #selfClosingAlert *ngIf="successMessageError" type="danger" (closed)="successMessageError = ''">{{
+        successMessageError }}
+      </ngb-alert>
+    </c-row>
     <c-row class="g-3">
       <c-col *ngIf="nuevoUsuario" [md]="4">
         <label cLabel for="inputUsuario">Usuario:</label>
-        <input cFormControl id="inputNombre" type="text" formControlName="usuario" placeholder="Usuario" />
+        <input cFormControl id="inputNombre" type="text" formControlName="usuario" placeholder="Usuario" 
+        [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['usuario'].touched) && 
+                productForm.controls['usuario'].invalid, 'is-valid': productForm.controls['usuario'].touched && 
+                productForm.controls['usuario'].valid }" />
+        <div
+          *ngIf="productForm.controls['usuario'].invalid && (productForm.controls['usuario'].dirty || productForm.controls['usuario'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['usuario'].errors.required">
+            Please enter username
+          </div>
+        </div>
       </c-col>
       <c-col *ngIf="nuevoUsuario" [md]="4">
         <label cLabel for="inputClave">Clave:</label>
-        <input cFormControl id="inputClave" type="password" formControlName="clave" placeholder="Clave" />
+        <input cFormControl id="inputClave" type="password" formControlName="clave" placeholder="Clave"
+        [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['clave'].touched) && 
+                productForm.controls['clave'].invalid, 'is-valid': productForm.controls['clave'].touched && 
+                productForm.controls['clave'].valid }" />
+        <div
+          *ngIf="productForm.controls['clave'].invalid && (productForm.controls['clave'].dirty || productForm.controls['clave'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['clave'].errors.required">
+            Please enter username
+          </div>
+        </div>
       </c-col>
     </c-row>
     <br />
     <c-row class="g-3">
       <c-col [md]="4">
         <label cLabel for="inputNombre">Nombre:</label>
-        <input cFormControl id="inputNombre" type="text" formControlName="nombre" placeholder="Nombre" />
+        <input cFormControl id="inputNombre" type="text" formControlName="nombre" placeholder="Nombre"
+        [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['nombre'].touched) && 
+                productForm.controls['nombre'].invalid, 'is-valid': productForm.controls['nombre'].touched && 
+                productForm.controls['nombre'].valid }" />
+        <div
+          *ngIf="productForm.controls['nombre'].invalid && (productForm.controls['nombre'].dirty || productForm.controls['nombre'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['nombre'].errors.required">
+            Please enter username
+          </div>
+        </div>
       </c-col>
       <c-col [md]="4">
         <label cLabel for="inputApePaterno">Apellido Paterno:</label>
         <input cFormControl id="inputApePaterno" type="text" formControlName="apePaterno"
-          placeholder="Apellido Paterno" />
+          placeholder="Apellido Paterno"
+          [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['apePaterno'].touched) && 
+                productForm.controls['apePaterno'].invalid, 'is-valid': productForm.controls['apePaterno'].touched && 
+                productForm.controls['apePaterno'].valid }" />
+        <div
+          *ngIf="productForm.controls['apePaterno'].invalid && (productForm.controls['apePaterno'].dirty || productForm.controls['apePaterno'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['apePaterno'].errors.required">
+            Please enter username
+          </div>
+        </div>
       </c-col>
       <c-col [md]="4">
         <label cLabel for="inputPassword4">Apellido Materno:</label>
         <input cFormControl id="inputPassword4" type="text" formControlName="apeMaterno"
-          placeholder="Apellido Materno" />
+          placeholder="Apellido Materno"
+          [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['apeMaterno'].touched) && 
+                productForm.controls['apeMaterno'].invalid, 'is-valid': productForm.controls['apeMaterno'].touched && 
+                productForm.controls['apeMaterno'].valid }" />
+        <div
+          *ngIf="productForm.controls['apeMaterno'].invalid && (productForm.controls['apeMaterno'].dirty || productForm.controls['apeMaterno'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['apeMaterno'].errors.required">
+            Please enter username
+          </div>          
+        </div>
       </c-col>
     </c-row>
     <br />
     <c-row class="g-3">
       <c-col [md]="4">
         <label cLabel for="inputCorreo">Correo:</label>
-        <input cFormControl id="inputCorreo" type="email" formControlName="correo" placeholder="Correo" />
+        <input cFormControl id="inputCorreo" type="email" formControlName="correo" placeholder="Correo"
+        [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['correo'].touched) && 
+                productForm.controls['correo'].invalid, 'is-valid': productForm.controls['correo'].touched && 
+                productForm.controls['correo'].valid }" />
+        <div
+          *ngIf="productForm.controls['correo'].invalid && (productForm.controls['correo'].dirty || productForm.controls['correo'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['correo'].errors.required">
+            Please enter username
+          </div>
+          <div *ngIf="productForm.controls['correo'].errors.pattern">
+            Ingrese un formato de correo correcto
+          </div>
+        </div>
       </c-col>
       <c-col [md]="4">
         <label cLabel for="inputTel">Telefono:</label>
-        <input cFormControl id="inputTel" type="tel" formControlName="telefono" placeholder="Telefono" />
+        <input cFormControl id="inputTel" type="tel" formControlName="telefono" placeholder="Telefono"
+        [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['telefono'].touched) && 
+                productForm.controls['telefono'].invalid, 'is-valid': productForm.controls['telefono'].touched && 
+                productForm.controls['telefono'].valid }" />
+        <div
+          *ngIf="productForm.controls['telefono'].invalid && (productForm.controls['telefono'].dirty || productForm.controls['telefono'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['telefono'].errors.required">
+            Please enter username
+          </div>
+        </div>
       </c-col>
       <c-col [md]="4">
         <label cLabel for="cboRoles">Rol</label>
-        <select cSelect id="cboRoles" formControlName="idRol">
+        <select cSelect id="cboRoles" formControlName="idRol"
+        [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['telefono'].touched) && 
+                productForm.controls['idRol'].invalid, 'is-valid': productForm.controls['idRol'].touched && 
+                productForm.controls['idRol'].valid }">
           <option *ngFor="let rol of Roles | async; let i = index" [value]="rol.id">
             {{rol.nombre}}
           </option>
         </select>
+        <div
+          *ngIf="productForm.controls['idRol'].invalid && (productForm.controls['idRol'].dirty || productForm.controls['idRol'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['idRol'].errors.required">
+            Please enter username
+          </div>
+        </div>
       </c-col>
     </c-row>
-    <br />    
+    <br />
     <div class="form-group">
       <div class="container">
         <div class="row">

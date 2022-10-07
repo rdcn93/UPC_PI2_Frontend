@@ -24,7 +24,9 @@ export class UsuarioAddEditComponent implements OnInit {
   usuarioId = 0;
   rolId = 0;
   titulo = "Registrar Usuario";
-
+  submitted : boolean = false;
+  successMessageSuccess = "";
+  successMessageError = "";
   constructor(
     private formbulider: FormBuilder,
     private route: ActivatedRoute,
@@ -37,23 +39,24 @@ export class UsuarioAddEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuarioId = this.route.snapshot.params['id'];
-
+    this.productForm = this.formbulider.group({
+      usuario: ['', [this.nuevoUsuario ? Validators.required : '']],
+      clave: ['', [this.nuevoUsuario ? Validators.required : '']],
+      nombre: ['', [Validators.required]],
+      apePaterno: ['', [this.nuevoUsuario ? Validators.required : '']],
+      apeMaterno: ['', [Validators.required]],
+      correo: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      telefono: ['', [Validators.required]],
+      idRol: ['', [Validators.required]]
+    });
+ 
     if(this.usuarioId != undefined && this.usuarioId != 0){
       this.nuevoUsuario = false;
       this.titulo = "Editar Usuario";
       this.ProductDetailsToEdit(this.usuarioId);
     }
 
-    this.productForm = this.formbulider.group({
-      usuario: ['', [Validators.required]],
-      clave: ['', [Validators.required]],
-      nombre: ['', [Validators.required]],
-      apePaterno: ['', [Validators.required]],
-      apeMaterno: ['', [Validators.required]],
-      correo: ['', [Validators.required]],
-      telefono: ['', [Validators.required]],
-      idRol: ['', [Validators.required]]
-    });
+    
 
     this.getRolesList();
     
@@ -67,8 +70,14 @@ export class UsuarioAddEditComponent implements OnInit {
   }
 
   PostProduct(product: Usuario) {
+    if (this.onValidate()) {
+      // TODO: Submit form value
+      // console.warn(this.productForm.value);
+    }
+
     if(this.productForm.invalid){
-      alert("Formulario incorrecto");
+      this.successMessageError = "Formulario incorrecto";
+      // alert("Formulario incorrecto");
       // this.toastr.warning("Formulario incorrecto");
       return;
     }
@@ -88,7 +97,8 @@ export class UsuarioAddEditComponent implements OnInit {
         this.router.navigate(['./','usuario']);
         this.toastr.success('Usuario registrado correctamente');
       }, error: (err: HttpErrorResponse) => {
-        this.toastr.error(err.error);
+        // this.toastr.error(err.error);
+        this.successMessageError = err.error;
       }
     }); 
   }
@@ -117,6 +127,17 @@ export class UsuarioAddEditComponent implements OnInit {
   }
 
   UpdateProduct(user: Usuario) {
+    if (this.onValidate()) {
+      // TODO: Submit form value
+      // console.warn(this.productForm.value);
+    }
+
+    if(this.productForm.invalid){
+      alert("Formulario incorrecto");
+      // this.toastr.warning("Formulario incorrecto");
+      return;
+    }
+
     user.id = this.usuarioId;
     const product_Master = this.productForm.value;
     // this.usuarioService.updateUsuario(user).subscribe(() => {
@@ -129,13 +150,21 @@ export class UsuarioAddEditComponent implements OnInit {
 
     this.usuarioService.updateUsuario(user).subscribe({
       next: () => {
-        debugger;
+        // 
         this.toastr.success('Usuario actualizado correctamente');
         this.router.navigateByUrl('/usuario');
       }, error: (err: HttpErrorResponse) => {
-        this.toastr.error(err.error);
+        // this.toastr.error(err.error);
+        this.successMessageError = err.error;
       }
     }); 
+  }
+
+  onValidate() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    return this.productForm.status === 'VALID';
   }
 
   // public forgotPassword = (user: Usuario) => {

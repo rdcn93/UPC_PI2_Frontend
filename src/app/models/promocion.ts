@@ -6,4 +6,6 @@ export class Promocion {
     fecFin = Date;    
     porcentajeDescuento = 0.0;
     productosIds : number[] = [];
+    fecInicioStr = "";
+    fecFinStr = "";    
 }
