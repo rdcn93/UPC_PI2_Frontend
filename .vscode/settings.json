@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/f51b2f79-3a93-4cad-aa17-2e76b427e54f/AppServices/subscriptions/f51b2f79-3a93-4cad-aa17-2e76b427e54f/resourceGroups/Recursos_UPC_PI2/providers/Microsoft.Web/sites/PremierBeefFrontend",
+    "appService.deploySubpath": "."
+}

@@ -1,7 +1,18 @@
 <a routerLink="add" class="btn btn-sm btn-success mb-2">Agregar Usuario</a>
 
 <div>
-    <div class="alert alert-success" style="text-align: center;"><b>Usuarios</b></div>
+  <c-row>
+    <h1 style="text-align: center;">Gestión de Usuario</h1>
+  </c-row>
+  <c-row>
+    <ngb-alert #selfClosingAlert *ngIf="successMessageSuccess" type="success" (closed)="successMessageSuccess = ''">{{
+      successMessageSuccess }}
+    </ngb-alert>
+    <ngb-alert #selfClosingAlert *ngIf="successMessageError" type="danger" (closed)="successMessageError = ''">{{
+      successMessageError }}
+    </ngb-alert>
+  </c-row>
+  <c-row>
     <div class="table-responsive" style="text-align: center;">
       <!-- <table datatable [dtOptions]="dtOptions" class="row-border hover"> -->
       <table class="table table-striped">
@@ -35,6 +46,7 @@
       </tbody>
       </table>
     </div>
+  </c-row>   
   </div>
 
   <!-- <button [cModalToggle]="verticallyCenteredModal.id" cButton>Centered modal</button>

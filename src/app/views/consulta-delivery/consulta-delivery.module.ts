@@ -19,7 +19,7 @@ import {
   SharedModule,
   UtilitiesModule
 } from '@coreui/angular';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   imports: [
     ConsultaDeliveryRoutingModule,
@@ -38,7 +38,8 @@ import {
     UtilitiesModule,
     IconModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    NgbModule
   ],
   declarations: [ConsultaDeliveryComponent
   ]

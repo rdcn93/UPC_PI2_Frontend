@@ -13,13 +13,64 @@
     </c-row>
     <br />
     <c-row class="g-3">
-      <c-col [md]="4">
+      <!-- <c-col [md]="4">
         <label cLabel for="inputFechaInicio">Fecha Inicio:</label>
         <input cFormControl id="inputFechaInicio" type="text" formControlName="fecInicio" placeholder="Fecha Inicio" />
       </c-col>
       <c-col [md]="4">
         <label cLabel for="inputFechaFin">Fecha Fin:</label>
         <input cFormControl id="inputFechaFin" type="text" formControlName="fecFin" placeholder="Fecha Fin" />
+      </c-col> -->
+      <c-col [md]="4">
+        <label cLabel for="inputPedido">Fecha Inicio:</label>
+        <div class="dp-hidden position-absolute">
+          <div class="input-group">
+            <input name="datepicker"
+                   class="form-control"
+                   [minDate]="minDate"
+                   ngbDatepicker
+                   #datepicker="ngbDatepicker"
+                   [autoClose]="'outside'"
+                   (dateSelect)="onDateSelection($event)"
+                   [displayMonths]="3"
+                   [dayTemplate]="t"
+                   outsideDays="hidden"
+                   [startDate]="fromDate!"
+                   tabindex="-1">
+            <ng-template #t let-date let-focused="focused">
+              <span class="custom-day"
+                    [class.focused]="focused"
+                    [class.range]="isRange(date)"
+                    [class.faded]="isHovered(date) || isInside(date)"
+                    (mouseenter)="hoveredDate = date"
+                    (mouseleave)="hoveredDate = null">
+                {{ date.day }}
+              </span>
+            </ng-template>
+          </div>
+        </div>
+        <div class="input-group">
+          <input #dpFromDate
+                 class="form-control" placeholder="yyyy-mm-dd"
+                 name="dpFromDate"
+                 
+                 formControlName="fecInicio"
+                 [value]="formatter.format(fromDate)"
+                 (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
+          <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"><svg cIcon name="cilCalendar"></svg></button>
+        </div>
+      </c-col>
+      <c-col [md]="4">
+        <label cLabel for="inputPedido">Fecha Fin:</label>
+        <div class="input-group">          
+          <input #dpToDate
+                 class="form-control" placeholder="yyyy-mm-dd"
+                 name="dpToDate"
+                 formControlName="fecFin"
+                 [value]="formatter.format(toDate)"
+                 (input)="toDate = validateInput(toDate, dpToDate.value)">
+          <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"><svg cIcon name="cilCalendar"></svg></button>
+        </div>
       </c-col>
       <c-col [md]="2">
         <label cLabel for="inputPorcentaje">Porcentaje:</label>
@@ -29,7 +80,7 @@
     </c-row>
     <br />
     <c-row>
-      <c-col [md]="8">
+      <c-col [md]="12">
         <label cLabel for="inputPorcentaje">Porcentaje:</label>
         <ng-multiselect-dropdown 
               i18n-placeholder 

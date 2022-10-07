@@ -21,7 +21,8 @@ export class UsuarioListComponent implements OnDestroy, OnInit {
   ProductList?: Observable<Usuario[]>;
   ProductList1?: Observable<Usuario[]>;
   ModalVisible = false;
-  
+  successMessageSuccess = "";
+  successMessageError = "";
   constructor(
     private usuarioService: UsuarioService,
     private jwtHelper : JwtHelperService,
@@ -53,11 +54,15 @@ export class UsuarioListComponent implements OnDestroy, OnInit {
       this.usuarioService.deleteUsuario(id)
       .subscribe({
         next: (_) => {
+          
+          this.successMessageSuccess = 'Usuario eliminado correctamente';
           this.toastr.success('Usuario eliminado correctamente');
           this.getProductList();
       },
       error: (err: HttpErrorResponse) => {
-        this.toastr.success('Ocurrió un error al eliminar el usuario');
+        
+        this.successMessageError = err.error;
+        // this.toastr.success('Ocurrió un error al eliminar el usuario');
       }})
     }    
   }

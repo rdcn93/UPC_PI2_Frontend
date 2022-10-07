@@ -107,7 +107,6 @@ export function tokenGetter() {
     HttpClientModule,
     ToastrModule,
     DataTablesModule,
-    // RouterModule.forRoot(routes),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

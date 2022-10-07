@@ -4,6 +4,7 @@ export class Cliente {
     apePaterno = "";
     apeMaterno = "";
     telefono = "";
+    correo = "";
     direccion = "";
     idTipoDocumento = 0;
     numeroDocumento = "";

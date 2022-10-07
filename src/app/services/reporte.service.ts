@@ -4,7 +4,11 @@ import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
 import { HTTP_OPTIONS_EXCEL } from '../helper/headers';
 import { FiltroReporte } from '../models/filtroReporte';
+import { ReporteDelivery } from '../models/reportes/reporteDelivery';
+import { ReportePedidos } from '../models/reportes/reportePedidos';
 import { ReporteReclamos } from '../models/reportes/reporteReclamos';
+import { ReporteStock } from '../models/reportes/reporteStock';
+import { ReporteVentas } from '../models/reportes/reporteVentas';
 
 @Injectable({
     providedIn: 'root'
@@ -14,22 +18,22 @@ export class ReporteService {
   
     constructor(private http: HttpClient) {}
   
-    public ObtenerReporteVentas(filtro: FiltroReporte): Observable<ReporteReclamos[]> {
-      return this.http.post<ReporteReclamos[]>(
+    public ObtenerReporteVentas(filtro: FiltroReporte): Observable<ReporteVentas[]> {
+      return this.http.post<ReporteVentas[]>(
         `${environment.apiUrl}/${this.url}/ObtenerReporteVentas`,
         filtro
       );
     }
 
-    public ObtenerReportePedidos(filtro: FiltroReporte): Observable<ReporteReclamos[]> {
-      return this.http.post<ReporteReclamos[]>(
+    public ObtenerReportePedidos(filtro: FiltroReporte): Observable<ReportePedidos[]> {
+      return this.http.post<ReportePedidos[]>(
         `${environment.apiUrl}/${this.url}/ObtenerReportePedidos`,
         filtro
       );
     }
 
-    public ObtenerReporteStock(filtro: FiltroReporte): Observable<ReporteReclamos[]> {
-      return this.http.post<ReporteReclamos[]>(
+    public ObtenerReporteStock(filtro: FiltroReporte): Observable<ReporteStock[]> {
+      return this.http.post<ReporteStock[]>(
         `${environment.apiUrl}/${this.url}/ObtenerReporteStock`,
         filtro
       );
@@ -58,8 +62,8 @@ export class ReporteService {
       filtro, HTTP_OPTIONS_EXCEL);
     }
 
-    public ObtenerReporteDelivery(filtro: FiltroReporte): Observable<ReporteReclamos[]> {
-      return this.http.post<ReporteReclamos[]>(
+    public ObtenerReporteDelivery(filtro: FiltroReporte): Observable<ReporteDelivery[]> {
+      return this.http.post<ReporteDelivery[]>(
         `${environment.apiUrl}/${this.url}/ObtenerReporteDelivery`,
         filtro
       );
