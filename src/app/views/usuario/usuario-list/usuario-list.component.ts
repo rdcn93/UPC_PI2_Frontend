@@ -55,7 +55,7 @@ export class UsuarioListComponent implements OnDestroy, OnInit {
       .subscribe({
         next: (_) => {
           
-          this.successMessageSuccess = 'Usuario eliminado correctamente';
+          // this.successMessageSuccess = 'Usuario eliminado correctamente';
           this.toastr.success('Usuario eliminado correctamente');
           this.getProductList();
       },

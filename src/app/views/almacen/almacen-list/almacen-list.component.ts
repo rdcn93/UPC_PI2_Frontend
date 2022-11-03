@@ -22,7 +22,8 @@ export class AlmacenListComponent implements OnInit {
   ListaAlmacenes?: Observable<Almacen[]>;
   ListaAlmacenes1?: Observable<Almacen[]>;
   ModalVisible = false;
-
+  successMessageSuccess = "";
+  successMessageError = "";
   constructor(
     private almacenService: AlmacenService,
     private jwtHelper : JwtHelperService,
@@ -45,6 +46,7 @@ export class AlmacenListComponent implements OnInit {
       this.almacenService.deleteAlmacen(id)
     .subscribe({
       next: (_) => {
+        this.successMessageSuccess = 'Almacén eliminado correctamente';
         this.toastr.success('Almacén eliminado correctamente');
         this.getAlmacenesList();
     },

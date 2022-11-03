@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { ProveedorRoutingModule } from './proveedor-routing.module';
-import { ProveedorComponent } from './proveedor.component';
+import { CalculoStockRoutingModule } from './calculo-stock-routing.module';
+import { CalculoStockComponent } from './calculo-stock.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IconModule } from '@coreui/icons-angular';
@@ -8,6 +8,7 @@ import { IconModule } from '@coreui/icons-angular';
 import {
   ButtonGroupModule,
   ButtonModule,
+  ModalModule,
   CardModule,
   CollapseModule,
   DropdownModule,
@@ -18,15 +19,14 @@ import {
   SharedModule,
   UtilitiesModule
 } from '@coreui/angular';
-import { ProveedorListComponent } from './proveedor-list/proveedor-list.component';
-import { ProveedorAddEditComponent } from './proveedor-add-edit/proveedor-add-edit.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   imports: [
-    ProveedorRoutingModule,
+    CalculoStockRoutingModule,
     FormsModule,
     ButtonGroupModule,
     ButtonModule,
+    ModalModule,
     CardModule,
     CollapseModule,
     DropdownModule,
@@ -41,7 +41,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     NgbModule
   ],
-  declarations: [ProveedorComponent, ProveedorListComponent, ProveedorAddEditComponent]
+  declarations: [CalculoStockComponent
+  ]
 })
-export class ProveedorModule {
+export class CalculoStockModule {
 }

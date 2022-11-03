@@ -25,6 +25,15 @@ export class ReporteService {
       );
     }
 
+    public DescargarReporteVentas(filtro: FiltroReporte) { 
+      return this.http.post(`${environment.apiUrl}/${this.url}/ExcelReporteVentas`,  filtro,
+      {
+        // reportProgress: true,
+        observe: 'response',
+        responseType: 'blob'
+      }); 
+    }
+
     public ObtenerReportePedidos(filtro: FiltroReporte): Observable<ReportePedidos[]> {
       return this.http.post<ReportePedidos[]>(
         `${environment.apiUrl}/${this.url}/ObtenerReportePedidos`,
@@ -56,6 +65,7 @@ export class ReporteService {
         }
       )
     }
+    
 
     public DescargarReporteReclamos1(filtro: FiltroReporte) {
       return this.http.post<any>(`${environment.apiUrl}/${this.url}/ObtenerReporteReclamos`,
@@ -69,5 +79,4 @@ export class ReporteService {
       );
     }
 
-  
   }

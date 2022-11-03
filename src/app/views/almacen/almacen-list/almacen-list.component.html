@@ -1,35 +1,46 @@
 <a routerLink="add" class="btn btn-sm btn-success mb-2">Agregar Almacen</a>
-
 <div>
-    <div class="alert alert-success" style="text-align: center;"><b>Almacenes</b></div>
+  <c-row>
+    <h1 style="text-align: center;">Gestión de Almacenes</h1>
+  </c-row>
+  <c-row>
+    <ngb-alert #selfClosingAlert *ngIf="successMessageSuccess" type="success" (closed)="successMessageSuccess = ''">{{
+      successMessageSuccess }}
+    </ngb-alert>
+    <ngb-alert #selfClosingAlert *ngIf="successMessageError" type="danger" (closed)="successMessageError = ''">{{
+      successMessageError }}
+    </ngb-alert>
+  </c-row>
+  <c-row>
     <div class="table-responsive" style="text-align: center;">
       <table class="table table-striped">
         <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Nombre</th>
-          <th scope="col">Descripción</th>
-          <th scope="col">Dirección</th>
-          <th scope="col">Telefono</th>
-          <th scope="col">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let prd of ListaAlmacenes | async; index as i">
-          <th scope="row">{{ i + 1 }}</th>
-          <td>{{prd.nombre}}</td>
-          <td>{{prd.descripcion}}</td>
-          <td>{{prd.direccion}}</td>
-          <td>{{prd.telefono}}</td>
-          <td>
-            <a routerLink="edit/{{prd.id}}" cButton color="primary">Editar</a>
-            <!-- <button type="button" class="btn1" matTooltip="Click Edit Button" (click)='ProductDetailsToEdit(prd.id)'>Edit</button> -->
-            <!-- <a routerLink="edit/{{prd.id}}" class="btn btn-sm btn-primary mr-1">Edit</a> -->
-            |
-            <button type="button" cButton color="danger" (click)="DeleteProduct(prd.id)">Eliminar</button>
-          </td>
-        </tr>
-      </tbody>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prd of ListaAlmacenes | async; index as i">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{prd.nombre}}</td>
+            <td>{{prd.descripcion}}</td>
+            <td>{{prd.direccion}}</td>
+            <td>{{prd.telefono}}</td>
+            <td>
+              <a routerLink="edit/{{prd.id}}" cButton color="primary">Editar</a>
+              <!-- <button type="button" class="btn1" matTooltip="Click Edit Button" (click)='ProductDetailsToEdit(prd.id)'>Edit</button> -->
+              <!-- <a routerLink="edit/{{prd.id}}" class="btn btn-sm btn-primary mr-1">Edit</a> -->
+              |
+              <button type="button" cButton color="danger" (click)="DeleteProduct(prd.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
-  </div>
+  </c-row>
+</div>

@@ -1,14 +1,12 @@
 export class ReporteVentas {
     id: number = 0;
-    detalle = "";
-    usuarioRegistro = "";
-    usuarioRegistroCompleto = "";
-    fechaReclamo = "";
-    tipoReclamo = "";
-    pedido: number = 0;
     cliente = "";
-    respuesta = "";
-    usuarioRespuesta = "";
-    usuarioRespuestaCompleto = "";
-    fechaRespuesta = "";
+    tipo_documento = "";
+    documento = "";
+    fecha_emision = "";
+    tipo_comprobante = "";
+    serie_comprobante = "";
+    importe_grabado: number = 0.00;
+    importe_igv : number = 0.00;
+    importe_total : number = 0.00;       
 }

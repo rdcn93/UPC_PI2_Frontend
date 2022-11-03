@@ -23,6 +23,9 @@ export class ProveedorAddEditComponent implements OnInit {
   ProveedorId = 0;
   titulo = "Registrar Proveedor";
   tipoDocId = 0;
+  submitted : boolean = false;
+  successMessageSuccess = "";
+  successMessageError = "";
 
   constructor(
     private formbulider: FormBuilder,
@@ -62,21 +65,23 @@ export class ProveedorAddEditComponent implements OnInit {
   }
 
   PostProduct(product: Proveedor) {
-    if(this.productForm.invalid){
-      alert("Formulario incorrecto");
-      return;
+    if (this.onValidate()) {
+      // TODO: Submit form value
+      // console.warn(this.productForm.value);
+    }
 
+    if(this.productForm.invalid){
+      return;
     }
     const product_Master = this.productForm.value;
     
-
-
     this.ProveedorService.createProveedor(product_Master).subscribe({
       next: () => {
         this.router.navigate(['./','proveedor']);
         this.toastr.success('Proveedor registrado correctamente');
       }, error: (err: HttpErrorResponse) => {
-        this.toastr.error(err.error);
+        // this.toastr.error(err.error);
+        this.successMessageError = err.error;
       }
     }); 
   }
@@ -102,6 +107,15 @@ export class ProveedorAddEditComponent implements OnInit {
   }
 
   UpdateProduct(Proveedor: Proveedor) {
+    if (this.onValidate()) {
+      // TODO: Submit form value
+      // console.warn(this.productForm.value);
+    }
+
+    if(this.productForm.invalid){
+      return;
+    }
+
     Proveedor.id = this.ProveedorId;
     const product_Master = this.productForm.value;
   
@@ -111,9 +125,17 @@ export class ProveedorAddEditComponent implements OnInit {
         this.toastr.success('Proveedor actualizado correctamente');
         this.router.navigateByUrl('/proveedor');
       }, error: (err: HttpErrorResponse) => {
-        this.toastr.error(err.error);
+        // this.toastr.error(err.error);
+        this.successMessageError = err.error;
       }
     });
+  }
+
+  onValidate() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    return this.productForm.status === 'VALID';
   }
 
   isUserAuthenticated() {

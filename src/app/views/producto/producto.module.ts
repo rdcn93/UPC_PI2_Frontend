@@ -20,7 +20,7 @@ import {
 } from '@coreui/angular';
 import { ProductoListComponent } from './producto-list/producto-list.component';
 import { ProductoAddEditComponent } from './producto-add-edit/producto-add-edit.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   imports: [
     ProductoRoutingModule,
@@ -39,6 +39,7 @@ import { ProductoAddEditComponent } from './producto-add-edit/producto-add-edit.
     IconModule,
     ReactiveFormsModule,
     CommonModule,
+    NgbModule
   ],
   declarations: [ProductoComponent, ProductoListComponent, ProductoAddEditComponent]
 })

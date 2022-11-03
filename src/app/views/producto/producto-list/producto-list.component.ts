@@ -17,7 +17,9 @@ export class ProductoListComponent implements OnInit {
   ListaProductos?: Observable<Producto[]>;
   ListaProductos1?: Observable<Producto[]>;
   ModalVisible = false;
-
+  successMessageSuccess = "";
+  successMessageError = "";
+  
   constructor(
     private productoService: ProductoService,
     private jwtHelper : JwtHelperService,
@@ -40,6 +42,7 @@ export class ProductoListComponent implements OnInit {
       this.productoService.deleteProducto(id)
       .subscribe({
         next: (_) => {
+          this.successMessageSuccess = 'Producto eliminado correctamente';
           this.toastr.success('Producto eliminado correctamente');
           this.getProductosList();
         },

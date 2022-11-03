@@ -16,6 +16,8 @@ export class PromocionListComponent implements OnInit {
   PromocionList?: Observable<Promocion[]>;
   PromocionList1?: Observable<Promocion[]>;
   ModalVisible = false;
+  successMessageSuccess = "";
+  successMessageError = "";
   constructor(
     private PromocionService: PromocionService,
     private jwtHelper : JwtHelperService,
@@ -38,11 +40,12 @@ export class PromocionListComponent implements OnInit {
       this.PromocionService.deletePromocion(id)
       .subscribe({
         next: (_) => {
-          this.toastr.success('Promoción eliminado correctamente');
+          this.successMessageSuccess = 'Promoción eliminada correctamente';
+          this.toastr.success('Promoción eliminada correctamente');
           this.getProductList();
       },
       error: (err: HttpErrorResponse) => {
-        this.toastr.success('Ocurrió un error al eliminar el promoción');
+        this.toastr.success('Ocurrió un error al eliminar la promoción');
       }})
     } 
    

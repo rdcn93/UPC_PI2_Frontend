@@ -25,6 +25,9 @@ export class ProductoAddEditComponent implements OnInit {
   titulo = "Registrar Producto";
   ListaProveedores?: Observable<Proveedor[]>;
   ListaCategorias?: Observable<Categoria[]>;
+  submitted : boolean = false;
+  successMessageSuccess = "";
+  successMessageError = "";
 
   constructor(
     private formbulider: FormBuilder,
@@ -67,11 +70,13 @@ export class ProductoAddEditComponent implements OnInit {
   }
 
   PostProduct(product: Producto) {
-    if(this.productForm.invalid){
-      alert("Formulario incorrecto");
-      return;
-
+    if (this.onValidate()) {
     }
+
+    if(this.productForm.invalid){
+      return;
+    }
+
     const product_Master = this.productForm.value;
     
     this.productoService.createProducto(product_Master).subscribe({
@@ -79,7 +84,9 @@ export class ProductoAddEditComponent implements OnInit {
         this.router.navigate(['./','producto']);
         this.toastr.success('Producto registrado correctamente');
       }, error: (err: HttpErrorResponse) => {
-        this.toastr.error(err.error);
+        debugger;
+        // this.toastr.error(err.error);
+        this.successMessageError = err.error;
       }
     }); 
   }
@@ -102,6 +109,13 @@ export class ProductoAddEditComponent implements OnInit {
   }
 
   UpdateProduct(producto: Producto) {
+    if (this.onValidate()) {
+    }
+
+    if(this.productForm.invalid){
+      return;
+    }
+
     producto.id = this.almacenId;
     const product_Master = this.productForm.value;
  
@@ -111,9 +125,18 @@ export class ProductoAddEditComponent implements OnInit {
         this.toastr.success('Producto actualizado correctamente');
         this.router.navigateByUrl('/producto');
       }, error: (err: HttpErrorResponse) => {
-        this.toastr.error(err.error);
+        // this.toastr.error(err.error);
+        this.successMessageError = err.error;
+
       }
     });
+  }
+
+  onValidate() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    return this.productForm.status === 'VALID';
   }
 
   isUserAuthenticated() {

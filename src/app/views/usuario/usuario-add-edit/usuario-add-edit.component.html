@@ -20,7 +20,7 @@
           *ngIf="productForm.controls['usuario'].invalid && (productForm.controls['usuario'].dirty || productForm.controls['usuario'].touched)"
           class="invalid-feedback">
           <div *ngIf="productForm.controls['usuario'].errors.required">
-            Please enter username
+            El campo Usuario es obligatorio
           </div>
         </div>
       </c-col>
@@ -34,7 +34,7 @@
           *ngIf="productForm.controls['clave'].invalid && (productForm.controls['clave'].dirty || productForm.controls['clave'].touched)"
           class="invalid-feedback">
           <div *ngIf="productForm.controls['clave'].errors.required">
-            Please enter username
+            El campo Clave es obligatorio
           </div>
         </div>
       </c-col>
@@ -51,7 +51,7 @@
           *ngIf="productForm.controls['nombre'].invalid && (productForm.controls['nombre'].dirty || productForm.controls['nombre'].touched)"
           class="invalid-feedback">
           <div *ngIf="productForm.controls['nombre'].errors.required">
-            Please enter username
+            El campo Nombre es obligatorio
           </div>
         </div>
       </c-col>
@@ -66,7 +66,7 @@
           *ngIf="productForm.controls['apePaterno'].invalid && (productForm.controls['apePaterno'].dirty || productForm.controls['apePaterno'].touched)"
           class="invalid-feedback">
           <div *ngIf="productForm.controls['apePaterno'].errors.required">
-            Please enter username
+            El campo Apellido Paterno es obligatorio
           </div>
         </div>
       </c-col>
@@ -81,7 +81,7 @@
           *ngIf="productForm.controls['apeMaterno'].invalid && (productForm.controls['apeMaterno'].dirty || productForm.controls['apeMaterno'].touched)"
           class="invalid-feedback">
           <div *ngIf="productForm.controls['apeMaterno'].errors.required">
-            Please enter username
+            El campo Apellido Materno es obligatorio
           </div>          
         </div>
       </c-col>
@@ -98,7 +98,7 @@
           *ngIf="productForm.controls['correo'].invalid && (productForm.controls['correo'].dirty || productForm.controls['correo'].touched)"
           class="invalid-feedback">
           <div *ngIf="productForm.controls['correo'].errors.required">
-            Please enter username
+            El campo Correo es obligatorio
           </div>
           <div *ngIf="productForm.controls['correo'].errors.pattern">
             Ingrese un formato de correo correcto
@@ -115,14 +115,14 @@
           *ngIf="productForm.controls['telefono'].invalid && (productForm.controls['telefono'].dirty || productForm.controls['telefono'].touched)"
           class="invalid-feedback">
           <div *ngIf="productForm.controls['telefono'].errors.required">
-            Please enter username
+            El campo Telefono es obligatorio
           </div>
         </div>
       </c-col>
       <c-col [md]="4">
         <label cLabel for="cboRoles">Rol</label>
         <select cSelect id="cboRoles" formControlName="idRol"
-        [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['telefono'].touched) && 
+        [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['idRol'].touched) && 
                 productForm.controls['idRol'].invalid, 'is-valid': productForm.controls['idRol'].touched && 
                 productForm.controls['idRol'].valid }">
           <option *ngFor="let rol of Roles | async; let i = index" [value]="rol.id">
@@ -133,7 +133,7 @@
           *ngIf="productForm.controls['idRol'].invalid && (productForm.controls['idRol'].dirty || productForm.controls['idRol'].touched)"
           class="invalid-feedback">
           <div *ngIf="productForm.controls['idRol'].errors.required">
-            Please enter username
+            El campo Rol es obligatorio
           </div>
         </div>
       </c-col>

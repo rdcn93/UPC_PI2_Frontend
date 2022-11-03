@@ -36,6 +36,9 @@ export class PromocionAddEditComponent implements OnInit {
   fromDate: NgbDate | null;
   toDate: NgbDate | null;
   destroySubject$: Subject<void> = new Subject();
+  submitted : boolean = false;
+  successMessageSuccess = "";
+  successMessageError = "";
   constructor(
     private calendar: NgbCalendar,
     public formatter: NgbDateParserFormatter,
@@ -105,7 +108,7 @@ export class PromocionAddEditComponent implements OnInit {
   }
 
   PostProduct(product: Promocion) {
-    
+
     const product_Master = this.productForm.value;
     const fecIni = this.fromDate;
     const fecFin = this.toDate;
@@ -128,8 +131,10 @@ export class PromocionAddEditComponent implements OnInit {
       product_Master.productosIds.push(estadoCombo.item_id);
     });
 
-    if (this.productForm.invalid) {
-      alert("Formulario incorrecto");
+    if (this.onValidate()) {
+    }
+
+    if(this.productForm.invalid){
       return;
     }
 
@@ -158,6 +163,12 @@ export class PromocionAddEditComponent implements OnInit {
         this.productForm.controls['fecInicio'].setValue(productResult.fecInicio);
         this.productForm.controls['fecFin'].setValue(productResult.fecFin);
         this.productForm.controls['porcentajeDescuento'].setValue(productResult.porcentajeDescuento);
+        
+        const dateFecIni = new Date(productResult.fecInicio);
+        this.productForm.controls['fecInicio'].setValue(this.formatter.format(new NgbDate(dateFecIni.getFullYear(), dateFecIni.getMonth() + 1, dateFecIni.getDate())));
+
+        const dateFecFin = new Date(productResult.fecFin);
+        this.productForm.controls['fecFin'].setValue(this.formatter.format(new NgbDate(dateFecFin.getFullYear(), dateFecFin.getMonth() + 1, dateFecFin.getDate())));
 
         productResult.productosIds.forEach((id: number) => {
           var prodById = this.lstProductos.find(e => e.item_id === id);
@@ -166,21 +177,21 @@ export class PromocionAddEditComponent implements OnInit {
             this.selectedItems.push(prodById);
           }
         });
-
-        this.productForm.controls['selectedItemProducto'].setValue(this.selectedItems);
-        const sdsdate: NgbDate = new NgbDate(2022, 10, 6);
-        this.fromDate = sdsdate;
-
-        const sdsadaddate: NgbDate = new NgbDate(2022, 10, 27);
-        this.toDate = sdsadaddate;
       }, error: (err: HttpErrorResponse) => {
-        this.toastr.error(err.error);
+        // this.toastr.error(err.error);
+        this.successMessageError = err.error;
       }
     });
   }
 
   UpdateProduct(promocion: Promocion) {
-    
+    if (this.onValidate()) {
+    }
+
+    if(this.productForm.invalid){
+      return;
+    }
+
     promocion.id = this.PromocionId;
     promocion.productosIds = [];
     const product_Master = this.productForm.value;
@@ -194,7 +205,8 @@ export class PromocionAddEditComponent implements OnInit {
         this.toastr.success('Promoción actualizado correctamente');
         this.router.navigateByUrl('/promocion');
       }, error: (err: HttpErrorResponse) => {
-        this.toastr.error(err.error);
+        // this.toastr.error(err.error);
+        this.successMessageError = err.error;
       }
     });
   }
@@ -234,13 +246,15 @@ export class PromocionAddEditComponent implements OnInit {
     const fecFin = this.toDate;
 
     if (fecIni != null && fecIni != undefined) {
-      this.productForm.controls['fecInicio'].setValue(new Date(fecIni.year, fecIni.month - 1, fecIni.day));
+      
+      // this.productForm.controls['fecInicio'].setValue(new Date(fecIni.year, fecIni.month - 1, fecIni.day));
+      this.productForm.controls['fecInicio'].setValue(this.formatter.format(new NgbDate(fecIni.year, fecIni.month, fecIni.day)));
     } else {
       this.productForm.controls['fecInicio'].setValue(new Date());
     }
 
     if (fecFin != null && fecFin != undefined) {
-      this.productForm.controls['fecFin'].setValue(new Date(fecFin.year, fecFin.month - 1, fecFin.day));
+      this.productForm.controls['fecFin'].setValue(this.formatter.format(new NgbDate(fecFin.year, fecFin.month, fecFin.day)));
     } else {
       this.productForm.controls['fecFin'].setValue(new Date());
     }
@@ -271,6 +285,13 @@ export class PromocionAddEditComponent implements OnInit {
     else {
       return false;
     }
+  }
+
+  onValidate() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    return this.productForm.status === 'VALID';
   }
 
   ngOnDestroy(): void {

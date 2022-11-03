@@ -31,9 +31,12 @@ export class LoginComponent {
         "Content-Type": "application/json; charset=utf-8s"
       })
     }).subscribe(response => {
-      
-      const token = (<any>response).token;
-      localStorage.setItem("jwt", token);
+      const responseObj = (<any>response);
+      const token = responseObj.token;
+      localStorage.setItem("jwt", responseObj.token);
+      localStorage.setItem("userId", responseObj.userId);
+      localStorage.setItem("user", responseObj.user);
+      localStorage.setItem("userFullName", responseObj.userFullName);
       this.invalidLogin = false;
       // this.toastr.success("Logged In successfully");
       this.router.navigate(["/usuario"]);

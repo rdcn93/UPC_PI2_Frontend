@@ -4,7 +4,7 @@ import { ConsultaPedidosComponent } from './consulta-pedidos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IconModule } from '@coreui/icons-angular';
-import { ToastrModule } from 'ngx-toastr';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import {

@@ -16,6 +16,9 @@ export class ClienteListComponent implements OnInit {
   ProductList?: Observable<Cliente[]>;
   ProductList1?: Observable<Cliente[]>;
   ModalVisible = false;
+  successMessageSuccess = "";
+  successMessageError = "";
+
   constructor(
     private ClienteService: ClienteService,
     private jwtHelper : JwtHelperService,
@@ -38,6 +41,7 @@ export class ClienteListComponent implements OnInit {
       this.ClienteService.deleteCliente(id)
       .subscribe({
         next: (_) => {
+          this.successMessageSuccess = 'Cliente eliminado correctamente';
           this.toastr.success('Cliente eliminado correctamente');
           this.getProductList();
       },

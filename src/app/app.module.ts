@@ -59,6 +59,8 @@ import {NgbDatepicker} from '@ng-bootstrap/ng-bootstrap';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 
+import { BlockUIModule } from 'ng-block-ui'
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
 };
@@ -76,6 +78,7 @@ export function tokenGetter() {
 @NgModule({
   declarations: [AppComponent, ...APP_CONTAINERS],
   imports: [
+    ToastrModule.forRoot({positionClass: 'toast-bottom-right'}),
     FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -104,17 +107,17 @@ export function tokenGetter() {
     BadgeModule,
     ListGroupModule,
     CardModule,
-    HttpClientModule,
-    ToastrModule,
+    HttpClientModule,    
     DataTablesModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:7133"],
+        allowedDomains: ["localhost:7133", "https://premierbeefapiapi.azure-api.net/api"],
         disallowedRoutes: []
       }
     }),
-    ToastrModule.forRoot()
+    // BlockUIModule.forRoot()
+    // ToastrModule.forRoot()
   ],
   providers: [
     {

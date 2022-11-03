@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { ProveedorRoutingModule } from './proveedor-routing.module';
-import { ProveedorComponent } from './proveedor.component';
+import { MigracionDataRoutingModule } from './migracion-data-routing.module';
+import { MigracionDataComponent } from './migracion-data.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IconModule } from '@coreui/icons-angular';
@@ -8,6 +8,7 @@ import { IconModule } from '@coreui/icons-angular';
 import {
   ButtonGroupModule,
   ButtonModule,
+  ModalModule,
   CardModule,
   CollapseModule,
   DropdownModule,
@@ -16,17 +17,20 @@ import {
   NavbarModule,
   NavModule,
   SharedModule,
-  UtilitiesModule
+  UtilitiesModule,
+  ProgressModule,
+  BadgeModule
 } from '@coreui/angular';
-import { ProveedorListComponent } from './proveedor-list/proveedor-list.component';
-import { ProveedorAddEditComponent } from './proveedor-add-edit/proveedor-add-edit.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BlockUIModule } from 'ng-block-ui';
+
 @NgModule({
   imports: [
-    ProveedorRoutingModule,
+    MigracionDataRoutingModule,
     FormsModule,
     ButtonGroupModule,
     ButtonModule,
+    ModalModule,
     CardModule,
     CollapseModule,
     DropdownModule,
@@ -39,9 +43,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     IconModule,
     ReactiveFormsModule,
     CommonModule,
-    NgbModule
+    NgbModule, 
+    ProgressModule,
+    BadgeModule,
+    BlockUIModule.forRoot()
   ],
-  declarations: [ProveedorComponent, ProveedorListComponent, ProveedorAddEditComponent]
+  declarations: [MigracionDataComponent
+  ]
 })
-export class ProveedorModule {
+export class MigracionDataModule {
 }
