@@ -1,7 +1,17 @@
 <a routerLink="add" class="btn btn-sm btn-success mb-2">Agregar Proveedor</a>
-
 <div>
-    <div class="alert alert-success" style="text-align: center;"><b>Proveedores</b></div>
+  <c-row>
+    <h1 style="text-align: center;">Gestión de Proveedores</h1>
+  </c-row>
+  <c-row>
+    <ngb-alert #selfClosingAlert *ngIf="successMessageSuccess" type="success" (closed)="successMessageSuccess = ''">{{
+      successMessageSuccess }}
+    </ngb-alert>
+    <ngb-alert #selfClosingAlert *ngIf="successMessageError" type="danger" (closed)="successMessageError = ''">{{
+      successMessageError }}
+    </ngb-alert>
+  </c-row>
+  <c-row>
     <div class="table-responsive" style="text-align: center;">
       <table class="table table-striped">
         <thead>
@@ -34,5 +44,5 @@
       </tbody>
       </table>
     </div>
-  </div>
-  
+  </c-row>
+</div>

@@ -71,14 +71,9 @@ export class UsuarioAddEditComponent implements OnInit {
 
   PostProduct(product: Usuario) {
     if (this.onValidate()) {
-      // TODO: Submit form value
-      // console.warn(this.productForm.value);
     }
 
     if(this.productForm.invalid){
-      this.successMessageError = "Formulario incorrecto";
-      // alert("Formulario incorrecto");
-      // this.toastr.warning("Formulario incorrecto");
       return;
     }
     const user = this.productForm.value;
@@ -95,7 +90,7 @@ export class UsuarioAddEditComponent implements OnInit {
     this.usuarioService.createUsuario(user).subscribe({
       next: () => {
         this.router.navigate(['./','usuario']);
-        this.toastr.success('Usuario registrado correctamente');
+        this.toastr.success('Usuario registrado correctamente','Mensaje', { progressBar: true });
       }, error: (err: HttpErrorResponse) => {
         // this.toastr.error(err.error);
         this.successMessageError = err.error;
@@ -133,7 +128,8 @@ export class UsuarioAddEditComponent implements OnInit {
     }
 
     if(this.productForm.invalid){
-      alert("Formulario incorrecto");
+      this.successMessageError = "Formulario incorrecto";
+      // alert("Formulario incorrecto");
       // this.toastr.warning("Formulario incorrecto");
       return;
     }
@@ -151,7 +147,7 @@ export class UsuarioAddEditComponent implements OnInit {
     this.usuarioService.updateUsuario(user).subscribe({
       next: () => {
         // 
-        this.toastr.success('Usuario actualizado correctamente');
+        this.toastr.success('Usuario actualizado correctamente','Mensaje', { progressBar: true });
         this.router.navigateByUrl('/usuario');
       }, error: (err: HttpErrorResponse) => {
         // this.toastr.error(err.error);

@@ -20,7 +20,7 @@ import {
 } from '@coreui/angular';
 import { ReclamoListComponent } from './reclamo-list/reclamo-list.component';
 import { ReclamoAddEditComponent } from './reclamo-add-edit/reclamo-add-edit.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   imports: [
     ReclamoRoutingModule,
@@ -39,6 +39,7 @@ import { ReclamoAddEditComponent } from './reclamo-add-edit/reclamo-add-edit.com
     IconModule,
     ReactiveFormsModule,
     CommonModule,
+    NgbModule
   ],
   declarations: [ReclamoComponent, ReclamoListComponent, ReclamoAddEditComponent]
 })

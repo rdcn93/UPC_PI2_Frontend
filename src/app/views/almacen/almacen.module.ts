@@ -20,6 +20,7 @@ import {
 } from '@coreui/angular';
 import { AlmacenListComponent } from './almacen-list/almacen-list.component';
 import { AlmacenAddEditComponent } from './almacen-add-edit/almacen-add-edit.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { AlmacenAddEditComponent } from './almacen-add-edit/almacen-add-edit.com
     IconModule,
     ReactiveFormsModule,
     CommonModule,
+    NgbModule
   ],
   declarations: [AlmacenComponent, AlmacenListComponent, AlmacenAddEditComponent]
 })

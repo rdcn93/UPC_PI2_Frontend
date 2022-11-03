@@ -16,6 +16,8 @@ export class ReclamoListComponent implements OnInit {
   ReclamoList?: Observable<Reclamo[]>;
   ReclamoList1?: Observable<Reclamo[]>;
   ModalVisible = false;
+  successMessageSuccess = "";
+  successMessageError = "";
   constructor(
     private reclamoService: ReclamoService,
     private jwtHelper : JwtHelperService,
@@ -38,6 +40,7 @@ export class ReclamoListComponent implements OnInit {
       this.reclamoService.deleteReclamo(id)
       .subscribe({
         next: (_) => {
+          // this.successMessageSuccess = 'Usuario eliminado correctamente';
           this.toastr.success('Reclamo eliminado correctamente');
           this.getProductList();
       },

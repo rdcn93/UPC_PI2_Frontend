@@ -26,7 +26,7 @@ export class AlmacenComponent implements OnInit {
 
   public logOut = () => {
     localStorage.removeItem("jwt");
-    // this.router.navigate(["/"]);
+    //this.router.navigate(["/"]);
   }
 
   isUserAuthenticated() {

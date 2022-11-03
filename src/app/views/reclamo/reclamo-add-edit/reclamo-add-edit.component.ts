@@ -23,74 +23,81 @@ export class ReclamoAddEditComponent implements OnInit {
   ReclamoId = 0;
   titulo = "Registrar Reclamo";
   tipoReclamoId = 0;
+  submitted : boolean = false;
+  successMessageSuccess = "";
+  successMessageError = "";
   constructor(
     private formbulider: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private ReclamoService: ReclamoService,
-    private jwtHelper : JwtHelperService,
+    private jwtHelper: JwtHelperService,
     private toastr: ToastrService,
     private ReclamoTipoService: ReclamoTipoService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.ReclamoId = this.route.snapshot.params['id'];
 
-    if(this.ReclamoId != undefined && this.ReclamoId != 0){
+    if (this.ReclamoId != undefined && this.ReclamoId != 0) {
       this.nuevoReclamo = false;
       this.titulo = "Editar Reclamo";
       this.ProductDetailsToEdit(this.ReclamoId);
     }
 
     this.productForm = this.formbulider.group({
-      idUsuario: ['', [Validators.required]],
       idTipoReclamo: ['', [Validators.required]],
       idPedido: ['', [Validators.required]],
       detalle: ['', [Validators.required]],
-      respuesta: ['',''],
+      respuesta: ['', ''],
     });
 
     this.getRiposReclamoList();
 
-    if(this.tipoReclamoId != 0){
-      this.productForm.controls['idTipoReclamo'].setValue(this.tipoReclamoId);  
+    if (this.tipoReclamoId != 0) {
+      this.productForm.controls['idTipoReclamo'].setValue(this.tipoReclamoId);
     }
   }
 
   getRiposReclamoList() {
-    this.TiposReclamo = this.ReclamoTipoService.getReclamoTipos();    
+    this.TiposReclamo = this.ReclamoTipoService.getReclamoTipos();
   }
 
-  PostProduct(product: Reclamo) {
-    if(this.productForm.invalid){
-      alert("Formulario incorrecto");
-      return;
-
+  PostProduct(product: Reclamo) {  
+    if (this.onValidate()) {
     }
+
+    if(this.productForm.invalid){
+      return;
+    }
+
     const product_Master = this.productForm.value;
-    
-   
+
+    const userIdLS = localStorage.getItem("userId");
+    const userId = Number(userIdLS);
+    product_Master.idUsuario = userId;
 
     this.ReclamoService.createReclamo(product_Master).subscribe({
       next: () => {
-        this.router.navigate(['./','reclamo']);
+        this.router.navigate(['./', 'reclamo']);
         this.toastr.success('Reclamo registrado correctamente');
       }, error: (err: HttpErrorResponse) => {
+        debugger;
         this.toastr.error(err.error);
+        this.successMessageError = err.error;
       }
-    }); 
+    });
   }
 
-  Clear(product: Reclamo){
+  Clear(product: Reclamo) {
     this.nuevoReclamo = true;
     this.productForm.reset();
   }
 
   ProductDetailsToEdit(id: number) {
     this.nuevoReclamo = false;
-    this.ReclamoService.getReclamoById(id).subscribe(productResult => {      
+    this.ReclamoService.getReclamoById(id).subscribe(productResult => {
       this.ReclamoId = productResult.id;
-      this.productForm.controls['idUsuario'].setValue(productResult.idUsuario);     
       this.productForm.controls['idPedido'].setValue(productResult.idPedido);
       this.productForm.controls['idTipoReclamo'].setValue(productResult.idTipoReclamo);
       this.productForm.controls['detalle'].setValue(productResult.detalle);
@@ -101,18 +108,36 @@ export class ReclamoAddEditComponent implements OnInit {
   }
 
   UpdateProduct(Reclamo: Reclamo) {
+    if (this.onValidate()) {
+    }
+
+    if(this.productForm.invalid){
+      return;
+    }
+
     Reclamo.id = this.ReclamoId;
     const product_Master = this.productForm.value;
 
+    const userIdLS = localStorage.getItem("userId");
+    const userId = Number(userIdLS);
+    product_Master.idUsuarioRespuesta = userId;
 
     this.ReclamoService.updateReclamo(Reclamo).subscribe({
       next: () => {
         this.toastr.success('Reclamo actualizado correctamente');
         this.router.navigateByUrl('/reclamo');
       }, error: (err: HttpErrorResponse) => {
-        this.toastr.error(err.error);
+        // this.toastr.error(err.error);
+        this.successMessageError = err.error;
       }
     });
+  }
+
+  onValidate() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    return this.productForm.status === 'VALID';
   }
 
   isUserAuthenticated() {

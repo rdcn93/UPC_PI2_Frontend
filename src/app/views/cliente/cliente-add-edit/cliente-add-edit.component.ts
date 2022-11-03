@@ -24,6 +24,9 @@ export class ClienteAddEditComponent implements OnInit {
   titulo = "Registrar Cliente";
   tipoDocId = 0;
   docEsRuc: boolean = true;
+  submitted : boolean = false;
+  successMessageSuccess = "";
+  successMessageError = "";
 
   constructor(
     private formbulider: FormBuilder,
@@ -49,16 +52,16 @@ export class ClienteAddEditComponent implements OnInit {
       apePaterno:  ['', [Validators.required]],
       apeMaterno: ['', [Validators.required]],
       telefono: ['', [Validators.required]],
+      correo: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
       direccion: ['', [Validators.required]],
       idTipoDocumento: ['', [Validators.required]],
       numeroDocumento: ['', [Validators.required]],
       enviarPromociones: ['', ''],
     });
 
-    this.validarTipoDocumento(this.ClienteId);
 
     this.getTipoDocumentosList();
-
+    this.validarTipoDocumento(this.tipoDocId == 0 ? 1 : this.tipoDocId);
     this.productForm.controls['idTipoDocumento'].setValue(this.tipoDocId != 0 ? this.tipoDocId : 1);
     this.productForm.controls['enviarPromociones'].setValue(false);  
   }
@@ -68,9 +71,15 @@ export class ClienteAddEditComponent implements OnInit {
   }
 
   PostProduct(product: Cliente) {
+    if (this.onValidate()) {
+      // TODO: Submit form value
+      // console.warn(this.productForm.value);
+    }
     
     if(this.productForm.invalid){
-      alert("Formulario incorrecto");
+      // this.successMessageError = "Formulario incorrecto";
+      // alert("Formulario incorrecto");
+      // this.toastr.warning("Formulario incorrecto");
       return;
     }
     const product_Master = this.productForm.value;
@@ -81,7 +90,8 @@ export class ClienteAddEditComponent implements OnInit {
         this.router.navigate(['./','cliente']);
         this.toastr.success('Cliente registrado correctamente');
       }, error: (err: HttpErrorResponse) => {
-        this.toastr.error(err.error);
+        // this.toastr.error(err.error);
+        this.successMessageError = err.error;
       }
     }); 
   }
@@ -101,6 +111,7 @@ export class ClienteAddEditComponent implements OnInit {
       this.productForm.controls['apeMaterno'].setValue(productResult.apeMaterno);
       this.productForm.controls['direccion'].setValue(productResult.direccion);
       this.productForm.controls['telefono'].setValue(productResult.telefono);
+      this.productForm.controls['correo'].setValue(productResult.correo);
       this.productForm.controls['idTipoDocumento'].setValue(productResult.idTipoDocumento);
       this.productForm.controls['numeroDocumento'].setValue(productResult.numeroDocumento);
       this.productForm.controls['enviarPromociones'].setValue(productResult.enviarPromociones);
@@ -110,8 +121,15 @@ export class ClienteAddEditComponent implements OnInit {
   }
 
   UpdateProduct(Cliente: Cliente) {
+    if (this.onValidate()) {
+      // TODO: Submit form value
+      // console.warn(this.productForm.value);
+    }
+
     if(this.productForm.invalid){
-      alert("Formulario incorrecto");
+      // this.successMessageError = "Formulario incorrecto";
+      // alert("Formulario incorrecto");
+      // this.toastr.warning("Formulario incorrecto");
       return;
     }
     Cliente.id = this.ClienteId;
@@ -123,7 +141,8 @@ export class ClienteAddEditComponent implements OnInit {
         this.toastr.success('Cliente actualizado correctamente');
         this.router.navigateByUrl('/cliente');
       }, error: (err: HttpErrorResponse) => {
-        this.toastr.error(err.error);
+        // this.toastr.error(err.error);
+        this.successMessageError = err.error;
       }
     });
   }
@@ -141,6 +160,13 @@ export class ClienteAddEditComponent implements OnInit {
       this.productForm.get('apePaterno').addValidators(Validators.required);
       this.productForm.get('apeMaterno').addValidators(Validators.required);
     }
+  }
+
+  onValidate() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    return this.productForm.status === 'VALID';
   }
 
   isUserAuthenticated() {

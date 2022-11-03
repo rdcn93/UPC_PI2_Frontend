@@ -91,6 +91,16 @@ const routes: Routes = [
           import('./views/consulta-delivery/consulta-delivery.module').then((m) => m.ConsultaDeliveryModule)
       },
       {
+        path: 'calculostock', canActivate: [AuthService],
+        loadChildren: () =>
+          import('./views/calculo-stock/calculo-stock.module').then((m) => m.CalculoStockModule)
+      },
+      {
+        path: 'migraciondata', canActivate: [AuthService],
+        loadChildren: () =>
+          import('./views/migracion-data/migracion-data.module').then((m) => m.MigracionDataModule)
+      },
+      {
         path: 'pages',
         loadChildren: () =>
           import('./views/pages/pages.module').then((m) => m.PagesModule)

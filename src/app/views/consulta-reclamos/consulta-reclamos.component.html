@@ -3,7 +3,7 @@
 
   <c-container> 
     <c-row>      
-      <c-col [md]="4">
+      <c-col [md]="3">
         <label cLabel for="inputPedido">Fecha Inicio:</label>
         <div class="dp-hidden position-absolute">
           <div class="input-group">
@@ -40,7 +40,7 @@
           <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"><svg cIcon name="cilCalendar"></svg></button>
         </div>
       </c-col>
-      <c-col [md]="4">
+      <c-col [md]="3">
         <label cLabel for="inputPedido">Fecha Fin:</label>
         <div class="input-group">          
           <input #dpToDate
@@ -52,9 +52,17 @@
           <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"><svg cIcon name="cilCalendar"></svg></button>
         </div>
       </c-col>
-      <c-col [md]="4">
+      <c-col [md]="3">
         <label cLabel for="inputPedido">Pedido:</label>
         <input cFormControl id="inputPedido" type="text" formControlName="idPedido" placeholder="Pedido" />
+      </c-col>
+      <c-col [md]="3">
+        <label cLabel for="cboRoles">Tipo de Reclamo</label>
+        <select cSelect id="cboRoles" formControlName="idTipoReclamo">
+          <option *ngFor="let rol of TiposReclamo; let i = index" [value]="rol.id">
+            {{rol.nombre}}
+          </option>
+        </select>
       </c-col>
     </c-row>
     <br/>
@@ -65,9 +73,9 @@
         </div>
       </c-col>
       <c-col [md]="4">
-        <div class="col-sm">
+        <!-- <div class="col-sm">
           <button type="submit" class="btn btn-primary" (click)="DescargarReporte(productForm.value)">Descargar</button>
-        </div>
+        </div> -->
       </c-col>
     </c-row>
   </c-container>

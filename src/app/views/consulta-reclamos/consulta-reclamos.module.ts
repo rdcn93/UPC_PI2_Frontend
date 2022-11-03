@@ -4,7 +4,6 @@ import { ConsultaReclamosComponent } from './consulta-reclamos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IconModule } from '@coreui/icons-angular';
-import { ToastrModule } from 'ngx-toastr';
 import {
   ButtonGroupModule,
   ButtonModule,
@@ -42,8 +41,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     IconModule,
     ReactiveFormsModule,
     CommonModule,
-    NgbModule,
-    ToastrModule
+    NgbModule
   ],
   declarations: [ConsultaReclamosComponent
   ]

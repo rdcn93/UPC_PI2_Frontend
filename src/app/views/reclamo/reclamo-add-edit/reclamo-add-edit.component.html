@@ -1,41 +1,76 @@
 <form class="form-horizontal" [formGroup]="productForm">
     <h1 style="text-align: center;">{{this.titulo}}</h1>
     <div>
+    <br /> 
     <div class="form-group">
-      <label class="control-label col-sm-2" for="pwd">Usuario Registro:</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" id="txtProductName" formControlName="idUsuario"
-          placeholder="Usuario">
+      <label class="control-label col-sm-2" for="pwd">Pedido:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="txtProductCost" formControlName="idPedido" placeholder="Pedido"
+        [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['idPedido'].touched) && 
+                productForm.controls['idPedido'].invalid, 'is-valid': productForm.controls['idPedido'].touched && 
+                productForm.controls['idPedido'].valid }" />
+        <div
+          *ngIf="productForm.controls['idPedido'].invalid && (productForm.controls['idPedido'].dirty || productForm.controls['idPedido'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['idPedido'].errors.required">
+            El campo Pedido es obligatorio
+          </div>
+        </div>
       </div>
-    </div>
-    <br />    
+    </div>   
+    <br /> 
     <div class="form-group">
       <div class="mb-3">
         <label cLabel for="exampleFormControlTextarea1">Detalle</label>
-        <textarea cFormControl id="exampleFormControlTextarea1" rows="3" formControlName="detalle" placeholder="Detalle"></textarea>
+        <textarea cFormControl id="exampleFormControlTextarea1" rows="3" formControlName="detalle" placeholder="Detalle" 
+        [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['detalle'].touched) && 
+                productForm.controls['detalle'].invalid, 'is-valid': productForm.controls['detalle'].touched && 
+                productForm.controls['detalle'].valid }"
+        ></textarea>        
+        <div
+          *ngIf="productForm.controls['detalle'].invalid && (productForm.controls['detalle'].dirty || productForm.controls['detalle'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['detalle'].errors.required">
+            El campo Detalle es obligatorio
+          </div>
+        </div>
         </div>
     </div>    
     <br />
     <div class="form-group">
       <label cLabel for="cboRoles">Tipo de Reclamo</label>
-        <select cSelect id="cboRoles" formControlName="idTipoReclamo">
+        <select cSelect id="cboRoles" formControlName="idTipoReclamo"
+        [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['idTipoReclamo'].touched) && 
+                productForm.controls['idTipoReclamo'].invalid, 'is-valid': productForm.controls['idTipoReclamo'].touched && 
+                productForm.controls['idTipoReclamo'].valid }">
           <option *ngFor="let rol of TiposReclamo | async; let i = index" [value]="rol.id">
             {{rol.nombre}}
           </option>
         </select>
-    </div>
-    <br />
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="pwd">Pedido:</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="txtProductCost" formControlName="idPedido" placeholder="Pedido">
-      </div>
+        <div
+          *ngIf="productForm.controls['idTipoReclamo'].invalid && (productForm.controls['idTipoReclamo'].dirty || productForm.controls['idTipoReclamo'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['idTipoReclamo'].errors.required">
+            El campo Tipo de Reclamo es obligatorio
+          </div>
+        </div>
     </div>
     <br />
     <div class="form-group" *ngIf="!nuevoReclamo">
       <div class="mb-3">
         <label cLabel for="exampleFormControlTextarea1">Respuesta</label>
-        <textarea cFormControl id="exampleFormControlTextarea1" rows="3" formControlName="respuesta" placeholder="Respuesta"></textarea>
+        <textarea cFormControl id="exampleFormControlTextarea1" rows="3" formControlName="respuesta" placeholder="Respuesta"
+        [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['respuesta'].touched) && 
+                productForm.controls['respuesta'].invalid, 'is-valid': productForm.controls['respuesta'].touched && 
+                productForm.controls['respuesta'].valid }"
+        ></textarea>
+        <div
+          *ngIf="productForm.controls['respuesta'].invalid && (productForm.controls['respuesta'].dirty || productForm.controls['respuesta'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['respuesta'].errors.required">
+            El campo Respuesta es obligatorio
+          </div>
+        </div>
         </div>
     </div>    
     <br />

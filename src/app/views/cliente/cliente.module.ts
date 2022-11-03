@@ -20,7 +20,7 @@ import {
 } from '@coreui/angular';
 import { ClienteListComponent } from './cliente-list/cliente-list.component';
 import { ClienteAddEditComponent } from './cliente-add-edit/cliente-add-edit.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   imports: [
     ClienteRoutingModule,
@@ -39,6 +39,7 @@ import { ClienteAddEditComponent } from './cliente-add-edit/cliente-add-edit.com
     IconModule,
     ReactiveFormsModule,
     CommonModule,
+    NgbModule
   ],
   declarations: [ClienteComponent, ClienteListComponent, ClienteAddEditComponent]
 })

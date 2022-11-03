@@ -1,11 +1,29 @@
 <form class="form-horizontal" [formGroup]="productForm">
     <h1 style="text-align: center;">{{this.titulo}}</h1>
     <div>    
+      <c-row>
+        <ngb-alert #selfClosingAlert *ngIf="successMessageSuccess" type="success" (closed)="successMessageSuccess = ''">{{
+          successMessageSuccess }}
+        </ngb-alert>
+        <ngb-alert #selfClosingAlert *ngIf="successMessageError" type="danger" (closed)="successMessageError = ''">{{
+          successMessageError }}
+        </ngb-alert>
+      </c-row>
     <div class="form-group">
       <label class="control-label col-sm-2" for="pwd">Nombre :</label>
       <div class="col-sm-4">
         <input type="text" class="form-control" id="txtProductDescription" formControlName="nombre"
-          placeholder="Nombre">
+          placeholder="Nombre"
+          [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['nombre'].touched) && 
+                productForm.controls['nombre'].invalid, 'is-valid': productForm.controls['nombre'].touched && 
+                productForm.controls['nombre'].valid }" />
+        <div
+          *ngIf="productForm.controls['nombre'].invalid && (productForm.controls['nombre'].dirty || productForm.controls['nombre'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['nombre'].errors.required">
+            El campo Nombre es obligatorio
+          </div>
+        </div>
       </div>
     </div>
     
@@ -13,21 +31,54 @@
     <div class="form-group">
       <label class="control-label col-sm-2" for="pwd">Descripción:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="txtProductCost" formControlName="descripcion" placeholder="Descripción">
+        <input type="text" class="form-control" id="txtProductCost" formControlName="descripcion" placeholder="Descripción"
+        placeholder="Descripción"
+          [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['descripcion'].touched) && 
+                productForm.controls['descripcion'].invalid, 'is-valid': productForm.controls['descripcion'].touched && 
+                productForm.controls['descripcion'].valid }" />
+        <div
+          *ngIf="productForm.controls['descripcion'].invalid && (productForm.controls['descripcion'].dirty || productForm.controls['descripcion'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['descripcion'].errors.required">
+            El campo Descripción es obligatorio
+          </div>
+        </div>
       </div>
     </div>
     <br />
     <div class="form-group">
       <label class="control-label col-sm-2" for="pwd">Dirección:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="txtStock" formControlName="direccion" placeholder="Dirección">
+        <input type="text" class="form-control" id="txtStock" formControlName="direccion" placeholder="Dirección"
+        placeholder="Dirección"
+          [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['direccion'].touched) && 
+                productForm.controls['direccion'].invalid, 'is-valid': productForm.controls['direccion'].touched && 
+                productForm.controls['direccion'].valid }" />
+        <div
+          *ngIf="productForm.controls['direccion'].invalid && (productForm.controls['direccion'].dirty || productForm.controls['direccion'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['direccion'].errors.required">
+            El campo Dirección es obligatorio
+          </div>
+        </div>
       </div>
     </div>
     <br />
     <div class="form-group">
       <label class="control-label col-sm-2" for="pwd">Telefono:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="txtStock" formControlName="telefono" placeholder="Telefono">
+        <input type="text" class="form-control" id="txtStock" formControlName="telefono" placeholder="Telefono"
+        placeholder="Teléfono"
+          [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['telefono'].touched) && 
+                productForm.controls['telefono'].invalid, 'is-valid': productForm.controls['telefono'].touched && 
+                productForm.controls['telefono'].valid }" />
+        <div
+          *ngIf="productForm.controls['telefono'].invalid && (productForm.controls['telefono'].dirty || productForm.controls['telefono'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['telefono'].errors.required">
+            El campo Teléfono es obligatorio
+          </div>
+        </div>
       </div>
     </div>
     <br />

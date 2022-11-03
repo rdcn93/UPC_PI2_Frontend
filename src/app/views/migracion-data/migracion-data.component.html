@@ -1,0 +1,83 @@
+<block-ui>
+<div>
+  <c-row>
+    <h1 style="text-align: center;">Migración de Archivos</h1>
+  </c-row>
+  <div *ngIf="puedeProcesar" class="row" style="margin-bottom:15px;">
+    <div class="mb-3">
+      <!-- <label cLabel for="formFile">Default file input example</label> -->
+      <!-- <input cFormControl id="formFile" type="file" /> -->
+      <input type="file" cFormControl #file placeholder="Seleccionar Archivo" (change)="uploadFile(file.files)" multiple>
+    </div>
+    <!-- <div class="col-md-3">
+      <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;" multiple>
+      <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+    </div> -->
+    <c-progress class="mb-3">
+      <c-progress-bar [animated]="true" color="success" [value]="progress" variant="striped"></c-progress-bar>
+    </c-progress>
+    <!-- <div class="col-md-4">
+      <span class="upload" *ngIf="progress> 0">
+        {{progress}}%
+      </span>
+      <span class="upload" *ngIf="message">
+        {{message}}
+      </span>
+    </div> -->
+  </div>
+  <c-row *ngIf="puedeProcesar">
+    <div class="col-sm">
+      <button type="button" class="btn btn-primary" (click)="ProcesarMigracion()">Procesar</button>
+    </div>
+  </c-row>
+  
+</div>
+<div>
+  <c-row>
+    <h1 style="text-align: center;">Historial</h1>
+  </c-row>
+  <c-row>
+    <ngb-alert #selfClosingAlert *ngIf="successMessageSuccess" type="success" (closed)="successMessageSuccess = ''">{{
+      successMessageSuccess }}
+    </ngb-alert>
+    <ngb-alert #selfClosingAlert *ngIf="successMessageError" type="danger" (closed)="successMessageError = ''">{{
+      successMessageError }}
+    </ngb-alert>
+  </c-row>
+  <c-row>
+    <div class="table-responsive" style="text-align: center;">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Archivo</th>
+            <th scope="col">Filas</th>
+            <th scope="col">Registradas</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prd of ListaArchivos | async; index as i">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{prd.nombreArchivo}}</td>
+            <td>{{prd.tipoArchivo}}</td>
+            <td>{{prd.totalFilas}}</td>
+            <td>{{prd.totalRegistradas}}</td>
+            <td>
+              <c-badge color="{{prd.estadoColor}}">{{prd.estado}}</c-badge>
+            </td>
+            <td>
+              <!-- <a routerLink="edit/{{prd.id}}" cButton color="primary">Descargar</a> -->
+              <button type="button" cButton color="primary" (click)="downloadFile(prd.nombreArchivo)">Descargar</button>
+              |
+              <button *ngIf="prd.puedeEliminar" type="button" cButton color="danger" (click)="DeleteArchivo(prd.nombreArchivo)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </c-row>
+</div>
+</block-ui>

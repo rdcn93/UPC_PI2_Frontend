@@ -16,6 +16,8 @@ export class ProveedorListComponent implements OnInit {
   ProveedorList?: Observable<Proveedor[]>;
   ProveedorList1?: Observable<Proveedor[]>;
   ModalVisible = false;
+  successMessageSuccess = "";
+  successMessageError = "";
   constructor(
     private proveedorService: ProveedorService,
     private jwtHelper : JwtHelperService,
@@ -38,6 +40,7 @@ export class ProveedorListComponent implements OnInit {
       this.proveedorService.deleteProveedor(id)
     .subscribe({
       next: (_) => {
+        // this.successMessageSuccess = 'Usuario eliminado correctamente';
         this.toastr.success('Proveedor eliminado correctamente');
         this.getProductList();
     },

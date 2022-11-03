@@ -11,6 +11,8 @@ import { ReporteReclamos } from 'src/app/models/reportes/reporteReclamos';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
+import { ReclamoTipo } from 'src/app/models/reclamoTipo';
+import { ReclamoTipoService } from 'src/app/services/reclamotipo.service';
 @Component({
   selector: 'app-consulta-reclamos',
   templateUrl: './consulta-reclamos.component.html',
@@ -22,6 +24,8 @@ export class ConsultaReclamosComponent implements OnInit {
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null;
   toDate: NgbDate | null;
+  TiposReclamo: ReclamoTipo[] = [{id: 0, nombre :"-- Seleccione --", descripcion : ""}];
+  TiposReclamo2?: ReclamoTipo[];
 
   destroySubject$: Subject<void> = new Subject();
   constructor(
@@ -31,7 +35,8 @@ export class ConsultaReclamosComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private reporteService: ReporteService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private ReclamoTipoService: ReclamoTipoService
   ) {
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
@@ -42,7 +47,28 @@ export class ConsultaReclamosComponent implements OnInit {
       fecInicio: ['', [Validators.required]],
       fecFin: ['', [Validators.required]],
       idPedido: ['', ''],
+      idTipoReclamo: ['', ''],
     });
+
+    this.getRiposReclamoList();
+  }
+
+  getRiposReclamoList() {
+    // this.TiposReclamo = this.ReclamoTipoService.getReclamoTipos();
+
+    this.ReclamoTipoService.getReclamoTipos().subscribe({
+      next: (tiposReclamo: ReclamoTipo[]) => {
+
+        tiposReclamo.forEach(element => {
+          this.TiposReclamo.push(element);
+        });
+
+      }, error: (err: HttpErrorResponse) => {
+        this.toastr.error(err.error);
+      }
+    });
+
+    this.productForm.controls['idTipoReclamo'].setValue(0);  
   }
 
   onDateSelection(date: NgbDate) {
@@ -96,6 +122,7 @@ export class ConsultaReclamosComponent implements OnInit {
     }
 
     user.idPedido = user.idPedido == "" ? 0 : user.idPedido;
+    user.idTipoReclamo = user.idTipoReclamo == "" ? 0 : user.idTipoReclamo;
 
     this.ResultReporte = this.reporteService.ObtenerReporteReclamos(user);
 

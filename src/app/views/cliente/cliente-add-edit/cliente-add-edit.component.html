@@ -2,6 +2,14 @@
   <h1 style="text-align: center;">{{this.titulo}}</h1>
   <br />
   <div> 
+    <c-row>
+      <ngb-alert #selfClosingAlert *ngIf="successMessageSuccess" type="success" (closed)="successMessageSuccess = ''">{{
+        successMessageSuccess }}
+      </ngb-alert>
+      <ngb-alert #selfClosingAlert *ngIf="successMessageError" type="danger" (closed)="successMessageError = ''">{{
+        successMessageError }}
+      </ngb-alert>
+    </c-row>
     <c-row class="g-3">
       <c-col [md]="4">
         <label cLabel for="roles">Tipo de Documento:</label>
@@ -16,44 +24,126 @@
       <c-col [md]="4">
         <label cLabel for="inputNumDocumento">Número de Documento:</label>
         <input cFormControl id="inputNumDocumento" type="text" formControlName="numeroDocumento"
-          placeholder="Número de Documento" />
+          placeholder="Número de Documento"
+          [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['apeMaterno'].touched) && 
+                productForm.controls['numeroDocumento'].invalid, 'is-valid': productForm.controls['numeroDocumento'].touched && 
+                productForm.controls['numeroDocumento'].valid }" />
+        <div
+          *ngIf="productForm.controls['numeroDocumento'].invalid && (productForm.controls['numeroDocumento'].dirty || productForm.controls['numeroDocumento'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['numeroDocumento'].errors.required">
+            El campo Númerod de Documento es obligatorio
+          </div>
+        </div>
       </c-col>
     </c-row>
     <br />
     <c-row class="g-3">
       <c-col [md]="4">
         <label cLabel for="inputNombre">Nombre:</label>
-        <input cFormControl id="inputNombre" type="text" formControlName="nombre" placeholder="Nombre" />
+        <input cFormControl id="inputNombre" type="text" formControlName="nombre" placeholder="Nombre" 
+        [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['nombre'].touched) && 
+                productForm.controls['nombre'].invalid, 'is-valid': productForm.controls['nombre'].touched && 
+                productForm.controls['nombre'].valid }" />
+        <div
+          *ngIf="productForm.controls['nombre'].invalid && (productForm.controls['nombre'].dirty || productForm.controls['nombre'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['nombre'].errors.required">
+            El campo Nombre es obligatorio
+          </div>
+        </div>
       </c-col>
       <c-col [md]="4" *ngIf="!docEsRuc">
         <label cLabel for="inputApePaterno">Apellido Paterno:</label>
         <input cFormControl id="inputApePaterno" type="text" formControlName="apePaterno"
-          placeholder="Apellido Paterno" />
+          placeholder="Apellido Paterno"
+          [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['apePaterno'].touched) && 
+                productForm.controls['apePaterno'].invalid, 'is-valid': productForm.controls['apePaterno'].touched && 
+                productForm.controls['apePaterno'].valid }" />
+        <div
+          *ngIf="productForm.controls['apePaterno'].invalid && (productForm.controls['apePaterno'].dirty || productForm.controls['apePaterno'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['apePaterno'].errors.required">
+            El campo Apellido Paterno es obligatorio
+          </div>
+        </div>
       </c-col>
       <c-col [md]="4" *ngIf="!docEsRuc">
         <label cLabel for="inputPassword4">Apellido Materno:</label>
         <input cFormControl id="inputPassword4" type="text" formControlName="apeMaterno"
-          placeholder="Apellido Materno" />
+          placeholder="Apellido Materno"
+          [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['apeMaterno'].touched) && 
+                productForm.controls['apeMaterno'].invalid, 'is-valid': productForm.controls['apeMaterno'].touched && 
+                productForm.controls['apeMaterno'].valid }" />
+        <div
+          *ngIf="productForm.controls['apeMaterno'].invalid && (productForm.controls['apeMaterno'].dirty || productForm.controls['apeMaterno'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['apeMaterno'].errors.required">
+            El campo Apellido Materno es obligatorio
+          </div>
+        </div>
       </c-col>
     </c-row>
     <br />
     <c-row class="g-3">
       <c-col [md]="8">
         <label cLabel for="inputNombre">Dirección:</label>
-        <input cFormControl id="inputNombre" type="text" formControlName="direccion" placeholder="Dirección" />
+        <input cFormControl id="inputNombre" type="text" formControlName="direccion" placeholder="Dirección"
+        [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['direccion'].touched) && 
+                productForm.controls['direccion'].invalid, 'is-valid': productForm.controls['direccion'].touched && 
+                productForm.controls['direccion'].valid }" />
+        <div
+          *ngIf="productForm.controls['direccion'].invalid && (productForm.controls['direccion'].dirty || productForm.controls['direccion'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['direccion'].errors.required">
+            El campo Apellido Materno es obligatorio
+          </div>
+        </div>
       </c-col>
       <c-col [md]="4">
         <label cLabel for="inputApePaterno">Telefono:</label>
-        <input cFormControl id="inputApePaterno" type="text" formControlName="telefono" placeholder="Telefono" />
+        <input cFormControl id="inputApePaterno" type="text" formControlName="telefono" placeholder="Telefono"
+        [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['telefono'].touched) && 
+                productForm.controls['telefono'].invalid, 'is-valid': productForm.controls['telefono'].touched && 
+                productForm.controls['telefono'].valid }" />
+        <div
+          *ngIf="productForm.controls['telefono'].invalid && (productForm.controls['telefono'].dirty || productForm.controls['telefono'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['telefono'].errors.required">
+            El campo Telefono es obligatorio
+          </div>
+        </div>
       </c-col>
     </c-row>
     <br />
-    <div class="form-group">
-      <c-form-check sizing="xl" switch>
-        <input cFormCheckInput checked type="checkbox" formControlName="enviarPromociones" />
-        <label cFormCheckLabel>Enviar correo de Promociones</label>
-      </c-form-check>
-    </div>
+    <c-row class="g-3">
+      <c-col [md]="4">
+        <label cLabel for="inputCorreo">Correo:</label>
+        <input cFormControl id="inputCorreo" type="text" formControlName="correo" placeholder="Correo"
+        [ngClass]="{ 'is-invalid':  (submitted || productForm.controls['correo'].touched) && 
+                productForm.controls['correo'].invalid, 'is-valid': productForm.controls['correo'].touched && 
+                productForm.controls['correo'].valid }" />
+        <div
+          *ngIf="productForm.controls['correo'].invalid && (productForm.controls['correo'].dirty || productForm.controls['correo'].touched)"
+          class="invalid-feedback">
+          <div *ngIf="productForm.controls['correo'].errors.required">
+            El campo Correo es obligatorio
+          </div>
+          <div *ngIf="productForm.controls['correo'].errors.pattern">
+            Ingrese un formato de correo correcto
+          </div>
+        </div>
+      </c-col>
+      <c-col [md]="4">
+        <label cLabel for="inputCorreo">Enviar correo de Promociones</label>
+        <div class="form-group">
+          <c-form-check sizing="xl" switch>            
+            <input cFormCheckInput checked type="checkbox" formControlName="enviarPromociones" />
+            <!-- <label cFormCheckLabel>Si</label> -->
+          </c-form-check>
+        </div>
+      </c-col>
+    </c-row>    
     <br />
     <div class="form-group">
       <div class="container">

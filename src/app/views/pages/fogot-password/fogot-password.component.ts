@@ -3,6 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ForgotPassword } from '../../../models/forgot-password';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
+import { environment } from 'src/environments/environment'; 
 
 @Component({
   selector: 'app-fogot-password',
@@ -40,7 +41,7 @@ export class FogotPasswordComponent implements OnInit {
 
     const forgotPassDto: ForgotPassword = {
       email: forgotPass.email,
-      clientURI: 'http://localhost:4200/michi/reset-password'
+      clientURI: `${environment.webUrl}/michi/reset-password`
     }
 
     this._authService.forgotPassword(forgotPassDto)

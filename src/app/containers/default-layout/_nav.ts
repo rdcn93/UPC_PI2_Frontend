@@ -15,8 +15,13 @@ export const navItems: INavData[] = [
     name: 'Cálculos'
   }, 
   {
+    name: 'Migración',
+    url: '/migraciondata',
+    iconComponent: { name: 'cil-calculator' }
+  },
+  {
     name: 'Cálculo de Stock',
-    url: '/theme/colors',
+    url: '/calculostock',
     iconComponent: { name: 'cil-calculator' }
   },
   {
@@ -36,18 +41,18 @@ export const navItems: INavData[] = [
         name: 'Pedido',
         url: '/consultapedidos'
       },      
-      {
-        name: 'Stock',
-        url: '/consultastock'
-      },
+      // {
+      //   name: 'Stock',
+      //   url: '/consultastock'
+      // },
       {
         name: 'Reclamos',
         url: '/consultareclamos'
       },
-      {
-        name: 'Delivery',
-        url: '/consultadelivery'
-      }
+      // {
+      //   name: 'Delivery',
+      //   url: '/consultadelivery'
+      // }
     ]
   },
   {

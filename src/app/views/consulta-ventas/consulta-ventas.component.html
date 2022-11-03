@@ -78,29 +78,29 @@
       <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Detalle</th>
-        <th scope="col">Usuario Registro</th>
-        <th scope="col">Fecha Reclamo</th>
-        <th scope="col">Tipo</th>
-        <th scope="col">Pedido</th>
         <th scope="col">Cliente</th>
-        <th scope="col">Respuesta</th>
-        <th scope="col">Usuario Respuesta</th>
-        <th scope="col">Fecha Respuesta</th>
+        <th scope="col">Tipo Documento</th>
+        <th scope="col">Documento</th>
+        <th scope="col">Fecha Emisión</th>
+        <th scope="col">Tipo Comprobante</th>
+        <th scope="col">Serie Comprobante</th>
+        <th scope="col">Importe Grabado</th>
+        <th scope="col">Importe IGV</th>
+        <th scope="col">Importe Total</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let prd of ResultReporte | async; index as i">
         <th scope="row">{{ i + 1 }}</th>
-        <td>{{prd.detalle}}</td>
-        <td>{{prd.usuarioRegistroCompleto}}</td>
-        <td>{{prd.fechaReclamo}}</td>
-        <td>{{prd.tipoReclamo}}</td>
-        <td>{{prd.pedido}}</td>
         <td>{{prd.cliente}}</td>
-        <td>{{prd.respuesta}}</td>
-        <td>{{prd.usuarioRespuestaCompleto}}</td>
-        <td>{{prd.fechaRespuesta}}</td>
+        <td>{{prd.tipo_documento}}</td>
+        <td>{{prd.documento}}</td>
+        <td>{{prd.fecha_emision}}</td>
+        <td>{{prd.tipo_comprobante}}</td>
+        <td>{{prd.serie_comprobante}}</td>
+        <td>{{prd.importe_grabado}}</td>
+        <td>{{prd.importe_igv}}</td>
+        <td>{{prd.importe_total}}</td>
       </tr>
     </tbody>
     </table>

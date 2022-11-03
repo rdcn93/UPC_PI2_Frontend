@@ -8,4 +8,6 @@ export class Reclamo {
     detalle = "";    
     respuesta = "";
     estadoReclamo = 0;
+    idUsuarioRespuesta = 0;
+    usuarioRepuesta = "";
 }

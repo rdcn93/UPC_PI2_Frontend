@@ -10,4 +10,5 @@ export class Usuario {
     idRol: number = 0;
     fecRegistro?: Date;
     fecModificacion?: Date;
+
 }

@@ -25,6 +25,9 @@ export class AlmacenAddEditComponent implements OnInit {
   nuevoAlmacen: boolean = true;
   almacenId = 0;
   titulo = "Registrar Almacen";
+  submitted : boolean = false;
+  successMessageSuccess = "";
+  successMessageError = "";
 
   constructor(
     private formbulider: FormBuilder,
@@ -49,19 +52,24 @@ export class AlmacenAddEditComponent implements OnInit {
       nombre: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
-      telefono: ['', ''],
+      telefono: ['', [Validators.required]],
     });
   }
 
 
   PostProduct(product: Almacen) {
-    if(this.productForm.invalid){
-      alert("Formulario incorrecto");
-      return;
-
+    if (this.onValidate()) {
+      // TODO: Submit form value
+      // console.warn(this.productForm.value);
     }
-    const product_Master = this.productForm.value;
-    
+
+    if(this.productForm.invalid){
+      this.successMessageError = "Formulario incorrecto";
+      // alert("Formulario incorrecto");
+      // this.toastr.warning("Formulario incorrecto");
+      return;
+    }
+    const product_Master = this.productForm.value;    
    
     this.almacenService.createAlmacen(product_Master).subscribe({
       next: () => {
@@ -90,6 +98,19 @@ export class AlmacenAddEditComponent implements OnInit {
   }
 
   UpdateProduct(almacen: Almacen) {
+    if (this.onValidate()) {
+      // TODO: Submit form value
+      // console.warn(this.productForm.value);
+    }
+
+    if(this.productForm.invalid){
+      this.successMessageError = "Formulario incorrecto";
+      // alert("Formulario incorrecto");
+      // this.toastr.warning("Formulario incorrecto");
+      return;
+    }
+
+
     almacen.id = this.almacenId;
     const product_Master = this.productForm.value;
     
@@ -102,6 +123,13 @@ export class AlmacenAddEditComponent implements OnInit {
         this.toastr.error(err.error);
       }
     });
+  }
+
+  onValidate() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    return this.productForm.status === 'VALID';
   }
 
   isUserAuthenticated() {
