@@ -4,7 +4,7 @@ import { CalculoStockComponent } from './calculo-stock.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IconModule } from '@coreui/icons-angular';
-
+import { ChartjsModule } from '@coreui/angular-chartjs';
 import {
   ButtonGroupModule,
   ButtonModule,
@@ -39,7 +39,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     IconModule,
     ReactiveFormsModule,
     CommonModule,
-    NgbModule
+    NgbModule,
+    ChartjsModule
   ],
   declarations: [CalculoStockComponent
   ]

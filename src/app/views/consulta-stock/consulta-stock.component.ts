@@ -7,12 +7,11 @@ import { ReporteService } from 'src/app/services/reporte.service';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ReporteReclamos } from 'src/app/models/reportes/reporteReclamos';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
 @Component({
-  selector: 'app-consulta-reclamos',
+  selector: 'app-consulta-stock',
   templateUrl: './consulta-stock.component.html',
   styleUrls: ['./consulta-stock.component.scss']
 })
@@ -41,7 +40,7 @@ export class ConsultaStockComponent implements OnInit {
     this.productForm = this.formbuilder.group({
       fecInicio: ['', [Validators.required]],
       fecFin: ['', [Validators.required]],
-      idPedido: ['', ''],
+      idProducto: ['', ''],
     });
   }
 
@@ -95,9 +94,10 @@ export class ConsultaStockComponent implements OnInit {
       user.fecFin = new Date()
     }
 
-    user.idPedido = user.idPedido == "" ? 0 : user.idPedido;
+    user.producto = '';
+    user.idProducto = 1;
 
-    this.ResultReporte = this.reporteService.ObtenerReporteReclamos(user);
+    this.ResultReporte = this.reporteService.ObtenerReporteStock(user);
 
   }
 
@@ -118,7 +118,7 @@ export class ConsultaStockComponent implements OnInit {
       user.fecFin = new Date()
     }
 
-    user.idPedido = user.idPedido == "" ? 0 : user.idPedido;
+    user.producto = user.idProducto;
 
     
     // this.reporteService.ObtenerReporteReclamos(user)

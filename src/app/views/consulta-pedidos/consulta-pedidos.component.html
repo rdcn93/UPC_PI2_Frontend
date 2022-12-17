@@ -65,9 +65,9 @@
           </div>
         </c-col>
         <c-col [md]="4">
-          <!-- <div class="col-sm">
+          <div class="col-sm">
             <button type="submit" class="btn btn-primary" (click)="DescargarReporte(productForm.value)">Descargar</button>
-          </div> -->
+          </div>
         </c-col>
       </c-row>
     </c-container>
@@ -78,29 +78,23 @@
       <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Detalle</th>
-        <th scope="col">Usuario Registro</th>
-        <th scope="col">Fecha Reclamo</th>
-        <th scope="col">Tipo</th>
-        <th scope="col">Pedido</th>
         <th scope="col">Cliente</th>
-        <th scope="col">Respuesta</th>
-        <th scope="col">Usuario Respuesta</th>
-        <th scope="col">Fecha Respuesta</th>
+        <th scope="col">Documento</th>
+        <th scope="col">Tipo Documento</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Cantidad Productos</th>
+        <th scope="col">Total</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let prd of ResultReporte | async; index as i">
         <th scope="row">{{ i + 1 }}</th>
-        <td>{{prd.detalle}}</td>
-        <td>{{prd.usuarioRegistroCompleto}}</td>
-        <td>{{prd.fechaReclamo}}</td>
-        <td>{{prd.tipoReclamo}}</td>
-        <td>{{prd.pedido}}</td>
         <td>{{prd.cliente}}</td>
-        <td>{{prd.respuesta}}</td>
-        <td>{{prd.usuarioRespuestaCompleto}}</td>
-        <td>{{prd.fechaRespuesta}}</td>
+        <td>{{prd.documento}}</td>
+        <td>{{prd.tipo_documento}}</td>
+        <td>{{prd.fecha_emision}}</td>
+        <td>{{prd.cantidad_productos}}</td>
+        <td>{{prd.total}}</td>
       </tr>
     </tbody>
     </table>

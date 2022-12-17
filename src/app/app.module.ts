@@ -60,6 +60,7 @@ import {NgbDatepicker} from '@ng-bootstrap/ng-bootstrap';
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 
 import { BlockUIModule } from 'ng-block-ui'
+import { ChartjsModule } from '@coreui/angular-chartjs';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -109,6 +110,7 @@ export function tokenGetter() {
     CardModule,
     HttpClientModule,    
     DataTablesModule,
+    ChartjsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

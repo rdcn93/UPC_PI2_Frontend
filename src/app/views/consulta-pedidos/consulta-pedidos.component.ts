@@ -96,12 +96,13 @@ export class ConsultaPedidosComponent implements OnInit {
     }
 
     user.idPedido = user.idPedido == "" ? 0 : user.idPedido;
-
-    this.ResultReporte = this.reporteService.ObtenerReporteReclamos(user);
+    user.producto = "";
+    
+    this.ResultReporte = this.reporteService.ObtenerReportePedidos(user);
 
   }
 
-  DescargarReporte(filtro: FiltroReporte) {
+  DescargarReporte(filtro: FiltroReporte): void {
     const user = this.productForm.value;
     const fecIni = this.fromDate;
     const fecFin = this.toDate;
@@ -120,22 +121,18 @@ export class ConsultaPedidosComponent implements OnInit {
 
     user.idPedido = user.idPedido == "" ? 0 : user.idPedido;
 
-    
-    // this.reporteService.ObtenerReporteReclamos(user)
-    //   .subscribe(
-    //     (data) => {
-    //       var file = new Blob([data], { type: 'application/vnd.ms-excel' });
-    //       var fileURL = URL.createObjectURL(file);
-    //       let a = document.createElement("a");
-    //       document.body.appendChild(a);
-    //       a.style.display = "none";
-    //       a.href = fileURL;
-    //       a.target = "_blank";
-    //       a.download = "ListOfSomeModel.xlsx";
-    //       a.click();
-    //       a.remove();
-    //     }
-    //   )
+    this.reporteService.DescargarReportePedidos(user).subscribe(response => {
+      let fileNameD = response.headers.get('content-disposition')?.split(';')[1].split('=')[1];
+      let blob: Blob = response.body as Blob;
+      if (fileNameD != undefined) {
+        let a = document.createElement('a');
+        a.download = fileNameD;
+        a.href = window.URL.createObjectURL(blob);
+        a.click();
+        document.body.removeChild(a);
+      }
+
+    });
   }
 
   ngOnDestroy(): void {

@@ -41,6 +41,15 @@ export class ReporteService {
       );
     }
 
+    public DescargarReportePedidos(filtro: FiltroReporte) { 
+      return this.http.post(`${environment.apiUrl}/${this.url}/ExcelReportePedidos`,  filtro,
+      {
+        // reportProgress: true,
+        observe: 'response',
+        responseType: 'blob'
+      }); 
+    }
+
     public ObtenerReporteStock(filtro: FiltroReporte): Observable<ReporteStock[]> {
       return this.http.post<ReporteStock[]>(
         `${environment.apiUrl}/${this.url}/ObtenerReporteStock`,

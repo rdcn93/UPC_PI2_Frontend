@@ -52,10 +52,10 @@
             <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"><svg cIcon name="cilCalendar"></svg></button>
           </div>
         </c-col>
-        <c-col [md]="4">
-          <label cLabel for="inputPedido">Pedido:</label>
-          <input cFormControl id="inputPedido" type="text" formControlName="idPedido" placeholder="Pedido" />
-        </c-col>
+        <!-- <c-col [md]="4">
+          <label cLabel for="inputPedido">Producto:</label>
+          <input cFormControl id="inputProducto" type="text" formControlName="idProducto" placeholder="Producto" />
+        </c-col> -->
       </c-row>
       <br/>
       <c-row>
@@ -78,29 +78,19 @@
       <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Detalle</th>
-        <th scope="col">Usuario Registro</th>
-        <th scope="col">Fecha Reclamo</th>
-        <th scope="col">Tipo</th>
-        <th scope="col">Pedido</th>
-        <th scope="col">Cliente</th>
-        <th scope="col">Respuesta</th>
-        <th scope="col">Usuario Respuesta</th>
-        <th scope="col">Fecha Respuesta</th>
+        <th scope="col">Fecha</th>
+        <!-- <th scope="col">Producto</th> -->
+        <th scope="col">Cantidad Pronóstico</th>
+        <th scope="col">Cantidad Real</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let prd of ResultReporte | async; index as i">
         <th scope="row">{{ i + 1 }}</th>
-        <td>{{prd.detalle}}</td>
-        <td>{{prd.usuarioRegistroCompleto}}</td>
-        <td>{{prd.fechaReclamo}}</td>
-        <td>{{prd.tipoReclamo}}</td>
-        <td>{{prd.pedido}}</td>
-        <td>{{prd.cliente}}</td>
-        <td>{{prd.respuesta}}</td>
-        <td>{{prd.usuarioRespuestaCompleto}}</td>
-        <td>{{prd.fechaRespuesta}}</td>
+        <td>{{prd.fecha}}</td>
+        <!-- <td>{{prd.producto}}</td> -->
+        <td>{{prd.cantidad_Pronostico}}</td>
+        <td>{{prd.cantidad_Real}}</td>
       </tr>
     </tbody>
     </table>

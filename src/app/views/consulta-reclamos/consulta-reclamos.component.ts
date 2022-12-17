@@ -123,6 +123,7 @@ export class ConsultaReclamosComponent implements OnInit {
 
     user.idPedido = user.idPedido == "" ? 0 : user.idPedido;
     user.idTipoReclamo = user.idTipoReclamo == "" ? 0 : user.idTipoReclamo;
+    user.producto = '';
 
     this.ResultReporte = this.reporteService.ObtenerReporteReclamos(user);
 

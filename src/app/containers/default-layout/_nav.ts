@@ -41,10 +41,10 @@ export const navItems: INavData[] = [
         name: 'Pedido',
         url: '/consultapedidos'
       },      
-      // {
-      //   name: 'Stock',
-      //   url: '/consultastock'
-      // },
+      {
+        name: 'Stock',
+        url: '/consultastock'
+      },
       {
         name: 'Reclamos',
         url: '/consultareclamos'

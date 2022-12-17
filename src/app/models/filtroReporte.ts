@@ -3,4 +3,6 @@ export class FiltroReporte {
     fecFin = Date;
     idPedido= 0;
     idTipoReclamo = 0;
+    idProducto = 0;
+    producto = "";
 }

@@ -96,6 +96,7 @@ export class ConsultaVentasComponent implements OnInit {
     }
 
     user.idPedido = user.idPedido == "" ? 0 : user.idPedido;
+    user.producto = "";
 
     this.ResultReporte = this.reporteService.ObtenerReporteVentas(user);
 
@@ -121,7 +122,6 @@ export class ConsultaVentasComponent implements OnInit {
     user.idPedido = user.idPedido == "" ? 0 : user.idPedido;
 
     this.reporteService.DescargarReporteVentas(user).subscribe(response => {
-      debugger;
       let fileNameD = response.headers.get('content-disposition')?.split(';')[1].split('=')[1];
       let blob: Blob = response.body as Blob;
       if (fileNameD != undefined) {

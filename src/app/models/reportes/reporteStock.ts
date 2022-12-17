@@ -1,14 +1,6 @@
 export class ReporteStock {
-    id: number = 0;
-    detalle = "";
-    usuarioRegistro = "";
-    usuarioRegistroCompleto = "";
-    fechaReclamo = "";
-    tipoReclamo = "";
-    pedido: number = 0;
-    cliente = "";
-    respuesta = "";
-    usuarioRespuesta = "";
-    usuarioRespuestaCompleto = "";
-    fechaRespuesta = "";
+    fecha = "";
+    producto = "";
+    cantidad_Pronostico: number = 0.000;
+    cantidad_Real: number = 0.000;
 }
